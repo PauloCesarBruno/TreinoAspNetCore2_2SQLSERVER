@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+//Adicionado:
+using System.Data;
+using System.Data.SqlClient;
+
+namespace TreinoAspNetCore2_2.Uteis
+{
+    public class DAL
+    {
+
+        private static readonly String Server = "LAPTOP-000NHHJV"; // Servidor SQL
+        private static readonly String Database = "TreinoASPCore2_2"; // Banco de Dados no SQL
+        private static readonly String User = "sa"; // Usuário SQL
+        private static readonly String Password = "Paradoxo22"; // Senha SQL
+
+        // String de Conexão SQL
+        private static readonly String sql = $"Server={Server};Database={Database};Uid={User};Pwd={Password};";
+
+        public SqlConnection Conexao()
+        {
+            return new SqlConnection(sql);
+        }
+        public void FecharConexao()
+        {
+            SqlConnection conn = Conexao();
+            conn.Close();
+        }
+        private SqlParameterCollection Colecao = new SqlCommand().Parameters;
+
+        public void LimparParametros()
+        {
+            Colecao.Clear();
+        }
+        public void AddParametros(String nome, Object valor)
+        {
+            Colecao.Add(new SqlParameter(nome, valor));
+        }
+
+        public object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
+        {
+            try
+            {
+                SqlConnection conn = Conexao();
+                conn.Open();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandType = commandType;
+                cmd.CommandText = Sp_Ou_Texto;
+                cmd.CommandTimeout = 3600;
+
+                foreach (SqlParameter param in Colecao)
+                {
+                    cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
+                }
+                return cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable ExecutaConsulta(CommandType commandType, String Sp_Ou_Texto)
+        {
+            try
+            {
+                SqlConnection conn = Conexao();
+                conn.Open();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandType = commandType;
+                cmd.CommandText = Sp_Ou_Texto;
+                cmd.CommandTimeout = 3600;
+
+                foreach (SqlParameter param in Colecao)
+                {
+                    cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
+                }
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+    }
+}

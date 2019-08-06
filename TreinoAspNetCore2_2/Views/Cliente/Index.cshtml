@@ -1,0 +1,71 @@
+﻿<br />
+<br />
+<h3>Lista de Clientes</h3>
+
+<div class=" container">
+    <div class="table-responsive">
+        <table class=" table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="padding: 0px 20px 0px 20px;">Id</th>
+                    <th style="padding: 0px 20px 0px 20px;">Nome</th>
+                    <th style="padding: 0px 20px 0px 20px;">CPF</th>
+                    <th style="padding: 0px 20px 0px 20px;">Data.Nasc.</th>
+                    <th style="padding: 0px 20px 0px 20px;">Limite</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                    {
+                <tr>
+                    <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                    <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+
+                    <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                    <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                    <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                    <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                    <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+<button class="btn btn-block btn-success" type="button" onclick="Cadastrar()">Cadastrar Cliente</button>
+
+<br />
+<script>
+
+    // Função em JS para Cadastrar
+    function Cadastrar() {
+        window.location.href = "../Cliente/Cadastro";
+    }
+
+    // Função em JS para Editar
+    function Editar(Id) {
+        window.location.href = "../Cliente/Cadastro/" + Id;
+    }
+
+    // Função em JS para Excluir
+    function Excluir(Id) {
+        window.location.href = "../Cliente/Excluir/" + Id;
+    }
+</script>
+
+<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
+<button type="button" class="btn  btn-default" onclick="Voltar()">Retornar para o Menu</button>
+
+<script>
+    function Voltar() {
+        window.location.href = '../../Home/Index';
+    }
+</script>
