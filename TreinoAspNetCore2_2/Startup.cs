@@ -34,7 +34,7 @@ namespace TreinoAspNetCore2_2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //Adicionar os serviços Abaixo (Injeção de dependência)
-            // Configurando o Hosta para que ele faça uso de seccion.
+            // Configurando o Host para que ele faça uso de seccion.
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
