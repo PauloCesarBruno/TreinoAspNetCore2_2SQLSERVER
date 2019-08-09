@@ -34,61 +34,73 @@ namespace TreinoAspNetCore2_2.Models
         
 
         // Método para carregar 
-        public List<ClienteModel> ListarTodosClientes()
-        {
-            List<ClienteModel> lista = new List<ClienteModel>();
-            ClienteModel item;
-            DAL objDal = new DAL();
-            objDal.LimparParametros();
-            DataTable dt = objDal.ExecutaConsulta(CommandType.StoredProcedure, "Carregar");
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                item = new ClienteModel
-                {
-                    Id = dt.Rows[i]["Id"].ToString(),
-                    Nome = dt.Rows[i]["Nome"].ToString(),
-                    CPF = dt.Rows[i]["CPF"].ToString(),
-                    DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal( dt.Rows[i]["LimiteDeCredito"].ToString())
-                };
-                objDal.FecharConexao();
-                lista.Add(item);
-            }
-
-            return lista;
-        }
-
-        // Método para carregar as informações para Edição
-        public ClienteModel RetornarCliente(int? Id)
-        {
-            ClienteModel item;
-            DAL objDal = new DAL();
-            objDal.LimparParametros();
-            objDal.AddParametros("@Id", Id);
-            DataTable dt = objDal.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
-
-            item = new ClienteModel
-            {
-                Id = dt.Rows[0]["Id"].ToString(),
-                Nome = dt.Rows[0]["Nome"].ToString(),
-                CPF = dt.Rows[0]["CPF"].ToString(),
-                DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
-                LimiteDeCredito = Convert.ToDecimal ( dt.Rows[0]["LimiteDeCredito"].ToString())
-            };
-            objDal.FecharConexao();
-            return item;
-        }
-
-        // Método para Inserir ou Alterar (INSERT OU UPDATE)
-        public void Gravar()
+        public List <ClienteModel> ListarTodosClientes()
         {
             try
             {
+                List<ClienteModel> lista = new List<ClienteModel>();
+                ClienteModel item;
                 DAL objDAL = new DAL();
-                string sql = string.Empty;
+                objDAL.LimparParametros();
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "Carregar");
 
-                if (Id != null)
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    item = new ClienteModel()
+                    {
+                        Id = dt.Rows[i]["Id"].ToString(),
+                        Nome = dt.Rows[i]["Nome"].ToString(),
+                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
+                        LimiteDeCredito = Convert.ToDecimal (dt.Rows[i]["LimiteDeCredito"])
+                    };
+                    objDAL.FecharConexao();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        // Método para carregar as informações para Edição
+        public ClienteModel RetornarCliente (int? Id)
+        {
+            try
+            {
+                ClienteModel item;
+                DAL objDAL = new DAL();
+                objDAL.LimparParametros();
+                objDAL.AddParametros("@Id", Id);
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
+
+                item = new ClienteModel()
+                {
+                    Id = dt.Rows[0]["Id"].ToString(),
+                    Nome = dt.Rows[0]["Nome"].ToString(),
+                    CPF = dt.Rows[0]["CPF"].ToString(),
+                    DataNascimento = dt.Rows [0]["DataNascimento"].ToString(),
+                    LimiteDeCredito = Convert.ToDecimal (dt.Rows [0]["LimiteDeCredito"])
+                };
+                objDAL.FecharConexao();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        // Método para Inserir ou Alterar (INSERT OU UPDATE)
+       public void Gravar ()
+        {
+            try
+            {
+                string sql = string.Empty;
+                DAL objDAL = new DAL();
+
+                if(Id != null)
                 {
                     objDAL.LimparParametros();
                     objDAL.AddParametros("@Id", Id);
@@ -102,14 +114,14 @@ namespace TreinoAspNetCore2_2.Models
                 else
                 {
                     objDAL.LimparParametros();
-                    // Não Necessita Id, pois é Chave Primária
+                    // O Id não é Necessário pois é chave primaria
                     objDAL.AddParametros("@Nome", Nome);
                     objDAL.AddParametros("@CPF", CPF);
                     objDAL.AddParametros("@DataNascimento", DataNascimento);
                     objDAL.AddParametros("@LimiteDeCredito", LimiteDeCredito);
                     String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Inserir").ToString();
                     objDAL.FecharConexao();
-                }              
+                }
             }
             catch (Exception ex)
             {
@@ -118,13 +130,20 @@ namespace TreinoAspNetCore2_2.Models
         }
 
         // Método para Excluir Registro
-        public void Excluir(int Id)
+       public void Excluir (int? Id)
         {
-            DAL objDAL = new DAL();
-            objDAL.LimparParametros();
-            objDAL.AddParametros("@Id", Id);
-            String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Excluir").ToString();
-            objDAL.FecharConexao();
+            try
+            {
+                DAL objDAL = new DAL();
+                objDAL.LimparParametros();
+                objDAL.AddParametros("@Id", Id);
+                String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Excluir").ToString();
+                objDAL.FecharConexao();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
