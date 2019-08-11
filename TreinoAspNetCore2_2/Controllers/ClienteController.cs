@@ -10,6 +10,13 @@ namespace TreinoAspNetCore2_2.Controllers
 {
     public class ClienteController : Controller
     {
+        /*===================================================================//
+        // Esse public (Teste()) é so para direcionar à uma view criada p/ testes.*/
+        public IActionResult Teste()
+        {
+            return View();
+        }
+        //===================================================================//
 
         public IActionResult Index()
         {
