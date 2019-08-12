@@ -119,7 +119,7 @@ namespace TreinoAspNetCore2_2.Models
                     objDAL.AddParametros("@CPF", CPF);
                     objDAL.AddParametros("@DataNascimento", DataNascimento);
                     objDAL.AddParametros("@LimiteDeCredito", LimiteDeCredito);
-                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Insert Into Clientes (Nome,CPF,DataNascimento,LimiteDeCredito) Values (@Nome,@CPF,@DataNascimento,@LimiteDeCredito)").ToString();
+                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Inserir").ToString();
                     objDAL.FecharConexao();
                 }
             }
@@ -137,7 +137,8 @@ namespace TreinoAspNetCore2_2.Models
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Excluir").ToString();
+                // Exemplo de uso de texto ao invés de S.Procedure, conf. permitido na classse DAL.
+                String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Delete Clientes Where Id=@Id").ToString();
                 objDAL.FecharConexao();
             }
             catch (Exception ex)

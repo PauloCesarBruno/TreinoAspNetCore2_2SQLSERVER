@@ -1,7 +1,4 @@
-﻿body {
-    background-color:blanchedalmond;
-}
-
+﻿
 #tit {
     font-style: italic;
     font-family: monotype corsiva;
@@ -9,11 +6,11 @@
 }
 
 #linha {
-    border: solid 1px blue;
+   border: solid 0.1px black;
 }
 
 #col {
-    border: solid 1px red;
+   border: solid 0.1px black;
 }
 
 #aligamento {
