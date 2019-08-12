@@ -18,6 +18,16 @@ namespace TreinoAspNetCore2_2.Controllers
         }
         //===================================================================//
 
+        /*===================================================================//
+         * 
+         * 
+        // Esse public (Post()) é so para simular uma View de um site de POSTAGEM.*/
+        public IActionResult Post()
+        {
+            return View();
+        }
+        //===================================================================//
+
         public IActionResult Index()
         {
             ViewBag.ListaClientes = new ClienteModel().ListarTodosClientes();

@@ -10,14 +10,12 @@ namespace TreinoAspNetCore2_2.Uteis
 {
     public class DAL
     {
+        private static readonly String Server = "LAPTOP-000NHHJV";
+        private static readonly String Database = "TreinoASPCore2_2";
+        private static readonly String User = "sa";
+        private static readonly String Password = "Paradoxo22";
 
-        private static readonly String Server = "LAPTOP-000NHHJV"; // Servidor SQL
-        private static readonly String Database = "TreinoASPCore2_2"; // Banco de Dados no SQL
-        private static readonly String User = "sa"; // Usuário SQL
-        private static readonly String Password = "Paradoxo22"; // Senha SQL
-
-        // String de Conexão SQL
-        private static readonly String sql = $"Server={Server};Database={Database};Uid={User};Pwd={Password};";
+        private static readonly String sql = $"Server = {Server}; Database ={Database}; Uid = {User}; Pwd = {Password}";
 
         public SqlConnection Conexao()
         {
@@ -34,12 +32,11 @@ namespace TreinoAspNetCore2_2.Uteis
         {
             Colecao.Clear();
         }
-        public void AddParametros(String nome, Object valor)
+        public void AddParametros (String nome, Object valor)
         {
             Colecao.Add(new SqlParameter(nome, valor));
         }
-
-        public object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
+        public Object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
         {
             try
             {
@@ -50,7 +47,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 cmd.CommandText = Sp_Ou_Texto;
                 cmd.CommandTimeout = 3600;
 
-                foreach (SqlParameter param in Colecao)
+                foreach(SqlParameter param in Colecao)
                 {
                     cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
                 }
@@ -61,7 +58,6 @@ namespace TreinoAspNetCore2_2.Uteis
                 throw new Exception(ex.Message);
             }
         }
-
         public DataTable ExecutaConsulta(CommandType commandType, String Sp_Ou_Texto)
         {
             try
@@ -73,7 +69,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 cmd.CommandText = Sp_Ou_Texto;
                 cmd.CommandTimeout = 3600;
 
-                foreach (SqlParameter param in Colecao)
+                foreach(SqlParameter param in Colecao)
                 {
                     cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
                 }
