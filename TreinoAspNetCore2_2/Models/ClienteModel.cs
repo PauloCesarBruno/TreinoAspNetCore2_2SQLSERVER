@@ -137,7 +137,8 @@ namespace TreinoAspNetCore2_2.Models
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                // Exemplo de uso de texto ao invés de S.Procedure, conf. permitido na classse DAL.
+                // Exemplo de uso de texto ao invés de S.Procedure, conf. permitido na classse DAL.100
+
                 String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Delete Clientes Where Id=@Id").ToString();
                 objDAL.FecharConexao();
             }
