@@ -11,7 +11,7 @@ namespace TreinoAspNetCore2_2.Controllers
     public class ClienteController : Controller
     {
         /*===================================================================//
-        // Esse public (Teste()) é so para direcionar à uma view criada p/ testes.*/
+        Esse public (Teste()) é so para direcionar à uma view criada p/ testes.*/
         public IActionResult Teste()
         {
             return View();
@@ -20,9 +20,15 @@ namespace TreinoAspNetCore2_2.Controllers
 
         /*===================================================================//
          * 
-         * 
-        // Esse public (Post()) é so para simular uma View de um site de POSTAGEM.*/
+         Esse public (Post()) é so para simular uma View de um site de POSTAGEM.*/
         public IActionResult Post()
+        {
+            return View();
+        }
+        //===================================================================//
+
+        // Esse public (Post()) é so para simular uma View de um site de POSTAGEM.*/
+        public IActionResult Teste_Cadastro()
         {
             return View();
         }
