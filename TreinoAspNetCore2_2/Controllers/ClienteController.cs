@@ -27,12 +27,24 @@ namespace TreinoAspNetCore2_2.Controllers
         }
         //===================================================================//
 
-        // Esse public (Post()) é so para simular uma View de um site de POSTAGEM.*/
+        // Esse public (Teste_Cadastro()) é so para simular uma View de um site de POSTAGEM.*/
         public IActionResult Teste_Cadastro()
         {
             return View();
         }
         //===================================================================//
+
+        // Esse public (Teste_Cadastro()) é so para simular uma View de um site de POSTAGEM.*/
+        public IActionResult Lista()
+        {
+            return View();
+        }
+        //===================================================================//
+
+
+
+
+
 
         public IActionResult Index()
         {
