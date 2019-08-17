@@ -42,6 +42,15 @@ namespace TreinoAspNetCore2_2.Controllers
         //===================================================================//
 
 
+        // Esse public (Teste_Cadastro()) é so para simular uma View de um site de POSTAGEM.*/
+        public IActionResult Mixto()
+        {
+            return View();
+        }
+        //===================================================================//
+
+
+
 
 
 
