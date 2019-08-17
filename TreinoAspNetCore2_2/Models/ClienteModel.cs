@@ -20,10 +20,10 @@ namespace TreinoAspNetCore2_2.Models
         [Required(ErrorMessage = "Informe o CPF ou CNPJ do Cliente")]
         public string CPF { get; set; }
 
-        [Required(ErrorMessage = "Informe a Data de Nascimento do Cliente")]      
+        [Required(ErrorMessage = "Informe a Data de Nascimento do Cliente")]
         public string DataNascimento { get; set; }
 
-        [Required(ErrorMessage = "Informe o Limite de Crédito do Cliente")]     
+        [Required(ErrorMessage = "Informe o Limite de Crédito do Cliente")]
         [Range(1, 99999.99)] // Valor Mínimo ao Máximo
         [DataType(DataType.Currency)]
         [Display(Name = "Limite De Crédito")]
@@ -31,10 +31,10 @@ namespace TreinoAspNetCore2_2.Models
 
 
 
-        
+
 
         // Método para carregar 
-        public List <ClienteModel> ListarTodosClientes()
+        public List<ClienteModel> ListarTodosClientes()
         {
             try
             {
@@ -49,10 +49,10 @@ namespace TreinoAspNetCore2_2.Models
                     item = new ClienteModel()
                     {
                         Id = dt.Rows[i]["Id"].ToString(),
-                        Nome= dt.Rows[i]["Nome"].ToString(),
-                        CPF = dt.Rows [i]["CPF"].ToString(),
-                        DataNascimento = dt.Rows [i]["DataNascimento"].ToString(),
-                        LimiteDeCredito = Convert .ToDecimal (dt.Rows [i]["LimiteDeCredito"])
+                        Nome = dt.Rows[i]["Nome"].ToString(),
+                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
+                        LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
                     };
                     objDAL.FecharConexao();
                     lista.Add(item);
@@ -64,26 +64,26 @@ namespace TreinoAspNetCore2_2.Models
                 throw new Exception(ex.Message);
             }
         }
+
         // Método para carregar as informações para Edição
-       public ClienteModel RetornarCliente(int? Id)
+        public ClienteModel RetornarCliente(int? Id)
         {
             try
             {
                 ClienteModel item;
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
-                objDAL.AddParametros("@Id",Id);
+                objDAL.AddParametros("@Id", Id);
                 DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
 
                 item = new ClienteModel()
                 {
-                    Id = dt.Rows [0]["Id"].ToString(),
-                    Nome = dt.Rows [0]["Nome"].ToString(),
+                    Id = dt.Rows[0]["Id"].ToString(),
+                    Nome = dt.Rows[0]["Nome"].ToString(),
                     CPF = dt.Rows[0]["CPF"].ToString(),
-                    DataNascimento = dt.Rows [0]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal (dt.Rows [0]["LimiteDeCredito"])
+                    DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
+                    LimiteDeCredito = Convert.ToDecimal(dt.Rows[0]["LimiteDeCredito"])
                 };
-                objDAL.FecharConexao();
                 return item;
             }
             catch (Exception ex)
@@ -93,14 +93,14 @@ namespace TreinoAspNetCore2_2.Models
         }
 
         // Método para Inserir ou Alterar (INSERT OU UPDATE)
-      public void Gravar()
+        public void Gravar()
         {
             try
             {
                 string sql = string.Empty;
                 DAL objDAL = new DAL();
 
-                if(Id != null)
+                if (Id != null)
                 {
                     objDAL.LimparParametros();
                     objDAL.AddParametros("@Id", Id);
@@ -114,7 +114,7 @@ namespace TreinoAspNetCore2_2.Models
                 else
                 {
                     objDAL.LimparParametros();
-                    // Não é Necessário o (Id), pois ele é chave primária
+                    // Id não é necessário, pois é chave primária
                     objDAL.AddParametros("@Nome", Nome);
                     objDAL.AddParametros("@CPF", CPF);
                     objDAL.AddParametros("@DataNascimento", DataNascimento);
@@ -130,15 +130,14 @@ namespace TreinoAspNetCore2_2.Models
         }
 
         // Método para Excluir Registro
-     public void Excluir (int? Id)
+        public void Excluir (int? Id)
         {
             try
             {
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                // Exemplo de uso de texto ao invés de S.Procedure, conf. permitido na classse DAL.100
-
+                // Exemplo de Uso de Texto conf. permitido na classe DAL...
                 String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Delete Clientes Where Id=@Id").ToString();
                 objDAL.FecharConexao();
             }
