@@ -55,6 +55,7 @@ namespace TreinoAspNetCore2_2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession(); // Não esquecer de acrescentar para usar a a Session.
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
