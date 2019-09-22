@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace TreinoAspNetCore2_2.Uteis
 {
-    public class 
+    public class DAL
     {
         public static readonly String Server = "LAPTOP-PP6GUSQU";
         public static readonly String Database = "TreinoASPCore2_2";
