@@ -8,6 +8,8 @@ using TreinoAspNetCore2_2.Models;
 
 namespace TreinoAspNetCore2_2.Controllers
 {
+    #region Métodos de teste
+
     public class ClienteController : Controller
     {
         /*===================================================================//
@@ -49,11 +51,7 @@ namespace TreinoAspNetCore2_2.Controllers
         }
         //===================================================================//
 
-
-
-
-
-
+        #endregion
 
         public IActionResult Index()
         {

@@ -15,11 +15,11 @@ namespace TreinoAspNetCore2_2.Uteis
         public static readonly String User = "sa";
         public static readonly String Password = "Paradoxo22";
 
-        public static readonly String sql = $"Server ={Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
+        public static readonly String sqlString = $"Server ={Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
 
         public SqlConnection Conexao ()
         {
-            return new SqlConnection(sql);
+            return new SqlConnection(sqlString);
         }
         public void FecharConexao()
         {
@@ -84,6 +84,46 @@ namespace TreinoAspNetCore2_2.Uteis
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        //========================================================================//
+        //Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo//
+
+        private static SqlConnection conn;
+
+        //Criação do Construtor 
+        public DAL()
+        {
+            conn = new SqlConnection(sqlString);
+            conn.Open();
+        }
+
+        // Espera um parâmetro do tipo string
+        // contendo um conteudo MySQL do tipo SELECT
+        public DataTable RetDatatable(String sql)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            return dt;
+        }
+
+        // Polimorfismo para evitar problemas com Racker na Injeção de Dependência.
+        public DataTable RetDatatable(SqlCommand cmd)
+        {
+            DataTable dt = new DataTable();
+            cmd.Connection = conn;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            return dt;
+        }
+
+        // Método que permite executar comandos de CRUD
+        public void ExecutarComandoSql(String sql)
+        {
+            SqlCommand Command = new SqlCommand(sql, conn);
+            Command.ExecuteNonQuery();
         }
     }
 }

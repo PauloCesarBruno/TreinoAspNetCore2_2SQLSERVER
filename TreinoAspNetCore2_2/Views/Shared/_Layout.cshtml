@@ -17,6 +17,8 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
+    <!--Link abaixo do CDN do font-awesome/4.7.0 para uso de Ícones, se necessáio-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
         .navbar-brand {
@@ -32,7 +34,10 @@
         }
     </style>
 </head>
-<body>
+
+<!--Abaixo chamada da função Java Script "CarregaUsuarioLogado()"
+    que esta no final deste template master-->
+<body onload="CarregaUsuarioLogado()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -45,7 +50,15 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Menu">Menu</a>
-                        </li>                       
+                        </li>
+                       
+                        <!--Abaixo Rotina de Injeção de dependência que esta referenciado
+                            no "Startup.cs da solução-->
+                        @using Microsoft.AspNetCore.Http
+                        @inject IHttpContextAccessor HttpContextAccessor
+                        <!--A div abaixo com o Id é que vai trazer o nome do usuário logado
+                            que esta na função Java Script no final deste template master-->
+                        <div id="NomeUsuarioLogado"></div>
                     </ul>
                 </div>
             </div>
@@ -57,67 +70,87 @@
             @RenderBody()
         </main>
     </div>
-    
-        <footer class="border-top">
-            <style>
 
-                .sociais a {
-                    font-size: 1.5em;
-                    padding: 0px 20px;
+    <footer class="border-top">
+        <style>
+
+            .sociais a {
+                font-size: 1.5em;
+                padding: 0px 20px;
+                text-decoration: none;
+                color: black;
+            }
+
+                .sociais a:hover {
                     text-decoration: none;
-                    color: black;
+                    color: deepskyblue;                    
                 }
 
-                    .sociais a:hover {
-                        text-decoration: none;
-                        color: deepskyblue;z
-                    }
+            #sombra {
+                font-size: 30px;
+                font-family: monotype corsiva;
+                text-shadow: 1px 2px 2px gray;
+                font-style: italic;
+            }
+        </style>
 
-                #sombra {
-                    font-size: 30px;
-                    font-family: monotype corsiva;
-                    text-shadow: 1px 2px 2px gray;
-                    font-style: italic;
-                }
-            </style>
+        <div class=" container">
 
-            <div class=" container">
+            <div class="text-center">
+                <br />
+                <p id="sombra">&reg; @DateTime.Now.Year  -  Paulo Bruno - Desenvolvedor</p>
 
-                <div class="text-center">
-                    <br />
-                    <p id="sombra">&reg; @DateTime.Now.Year  -  Paulo Bruno - Desenvolvedor</p>
-
-                    <div class="sociais">
-                        <a href="https://m.facebook.com/paulocesar.cbruno" target="_blank"><i class="fa fa-facebook"></i></a>
-                        <a href="https://www.youtube.com/channel/UC-7rKFVKo4JNNifPBBEEoYw?view_as=subscriber" target="_blank"><i class="fa fa-youtube"></i></a>
-                        <a href="http://sistemahospitalar.gear.host/" target="_blank"><i class="fa fa-globe"></i></a>
-                        <br /><br />
-                    </div>
+                <div class="sociais">
+                    <a href="https://m.facebook.com/paulocesar.cbruno" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/channel/UC-7rKFVKo4JNNifPBBEEoYw?view_as=subscriber" target="_blank"><i class="fa fa-youtube"></i></a>
+                    <a href="http://sistemahospitalar.gear.host/" target="_blank"><i class="fa fa-globe"></i></a>
+                    <br /><br />
                 </div>
             </div>
+        </div>
 
-        </footer>
-    
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-            </script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-            </script>
-        </environment>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    </footer>
 
-        @RenderSection("Scripts", required: false)
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <!--Abaixo a função em Java Script que pega o nome do usuário logao, valida, concatena e
+       define o estilo, tipo cor, posicionamento etc...-->
+    <script>
+        function CarregaUsuarioLogado()
+        {
+            var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
+
+            if (nome != "") // Se a variável "nome" for diferente de NADA o usuário esta logado.
+            {
+                var divNome = document.getElementById("NomeUsuarioLogado");
+                //Abaixo a concatenação sair volta para o Login e quebra a cessão.
+                divNome.innerHTML = "Logado: " + nome + " <a href='../Home/Login/0'>(Sair)<a/>";
+                divNome.style ="color:blue; padding-top: 15px; margin-left: 350px;"
+            }
+            else { // Usuário não logado
+                window.location.href = '../Home/Login';// Rotina para que o usuário não entre por fora.
+            }
+        }
+    </script>
 </body>
 </html>
