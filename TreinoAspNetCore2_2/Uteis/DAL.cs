@@ -17,7 +17,7 @@ namespace TreinoAspNetCore2_2.Uteis
 
         public static readonly String sqlString = $"Server ={Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
 
-        public SqlConnection Conexao ()
+        public SqlConnection Conexao()
         {
             return new SqlConnection(sqlString);
         }
@@ -48,7 +48,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 cmd.CommandText = Sp_Ou_Texto;
                 cmd.CommandTimeout = 3600;
 
-                foreach(SqlParameter param in Colecao)
+                foreach (SqlParameter param in Colecao)
                 {
                     cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
                 }
@@ -117,13 +117,6 @@ namespace TreinoAspNetCore2_2.Uteis
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             return dt;
-        }
-
-        // Método que permite executar comandos de CRUD
-        public void ExecutarComandoSql(String sql)
-        {
-            SqlCommand Command = new SqlCommand(sql, conn);
-            Command.ExecuteNonQuery();
         }
     }
 }
