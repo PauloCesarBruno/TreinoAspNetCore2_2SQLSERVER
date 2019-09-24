@@ -20,15 +20,16 @@ namespace TreinoAspNetCore2_2
         }
 
         public IConfiguration Configuration { get; }
-                
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+                // O Defout é "=> true", colocar " =>false"
+                options.CheckConsentNeeded = context => false; 
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //Adicionar os serviços Abaixo (Injeção de dependência)

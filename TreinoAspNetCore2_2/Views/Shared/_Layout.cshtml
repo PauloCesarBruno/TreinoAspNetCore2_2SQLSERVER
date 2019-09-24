@@ -51,7 +51,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Menu">Menu</a>
                         </li>
-                       
+
                         <!--Abaixo Rotina de Injeção de dependência que esta referenciado
                             no "Startup.cs da solução-->
                         @using Microsoft.AspNetCore.Http
@@ -73,7 +73,6 @@
 
     <footer class="border-top">
         <style>
-
             .sociais a {
                 font-size: 1.5em;
                 padding: 0px 20px;
@@ -83,7 +82,7 @@
 
                 .sociais a:hover {
                     text-decoration: none;
-                    color: deepskyblue;                    
+                    color: deepskyblue;
                 }
 
             #sombra {
@@ -138,8 +137,7 @@
     <script>
         function CarregaUsuarioLogado()
         {
-            var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
-
+            var nome ='@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
             if (nome != "") // Se a variável "nome" for diferente de NADA o usuário esta logado.
             {
                 var divNome = document.getElementById("NomeUsuarioLogado");
@@ -154,3 +152,4 @@
     </script>
 </body>
 </html>
+
