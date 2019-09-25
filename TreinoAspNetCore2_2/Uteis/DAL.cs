@@ -88,14 +88,14 @@ namespace TreinoAspNetCore2_2.Uteis
 
         //========================================================================//
         //Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo//
-              
+
 
         // Espera um parâmetro do tipo string
-        // contendo um conteudo MySQL do tipo SELECT
+        // contendo um conteudo SQL do tipo SELECT
         public DataTable RetDatatable(String sql)
         {
             DataTable dt = new DataTable();
-            SqlCommand cmd = new SqlCommand(sql, Conexao ());
+            SqlCommand cmd = new SqlCommand(sql, Conexao());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             return dt;
@@ -105,10 +105,30 @@ namespace TreinoAspNetCore2_2.Uteis
         public DataTable RetDatatable(SqlCommand cmd)
         {
             DataTable dt = new DataTable();
-            cmd.Connection = Conexao ();
+            cmd.Connection = Conexao();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             return dt;
         }
     }
 }
+
+/*public DataTable RetDatatable(String sql)
+{
+    DataTable dt = new DataTable();
+    SqlCommand cmd = new SqlCommand(sql, Conexao());
+    SqlDataAdapter da = new SqlDataAdapter(cmd);
+    da.Fill(dt);
+    return dt;
+}
+
+// Polimorfismo para evitar problemas com Racker na Injeção de Dependência.
+public DataTable RetDatatable(SqlCommand cmd)
+{
+    DataTable dt = new DataTable();
+    cmd.Connection = Conexao();
+    SqlDataAdapter da = new SqlDataAdapter(cmd);
+    da.Fill(dt);
+    return dt;
+}
+*/
