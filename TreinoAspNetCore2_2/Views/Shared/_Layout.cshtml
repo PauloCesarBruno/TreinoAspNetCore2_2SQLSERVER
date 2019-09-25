@@ -20,19 +20,7 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-
-    <style>
-        .navbar-brand {
-            font-size: 40px;
-            font-family: monotype corsiva;
-            text-shadow: 1px 2px 2px gray;
-            font-style: italic;
-        }
-
-        .nav-link {
-            font-size: 22px;
-            font-style: italic;
-        }
+      
     </style>
 </head>
 
@@ -144,7 +132,7 @@
                 var divNome = document.getElementById("NomeUsuarioLogado");
                 //Abaixo a concatenação sair volta para o Login e quebra a cessão.
                 divNome.innerHTML = "Logado: " + nome + " <a href='../Home/Login/0'><strong><em>(Sair)<em/><strong/><a/>";
-                divNome.style ="color:blue; padding-top: 15px; margin-left: 200px;"
+                divNome.style ="color:red; padding-top: 10px; margin-left: 118px; font-size: 12px;"
             }
             else { // Usuário não logado
                 window.location.href = '../Home/Login';// Rotina para que o usuário não entre por fora.
