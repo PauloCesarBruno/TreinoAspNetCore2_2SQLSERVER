@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -92,7 +94,7 @@ namespace TreinoAspNetCore2_2.Uteis
 
         // Espera um parâmetro do tipo string
         // contendo um conteudo SQL do tipo SELECT
-        public DataTable RetDatatable(String sql)
+       public DataTable RetDatatable(String sql)
         {
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(sql, Conexao());
@@ -121,7 +123,6 @@ namespace TreinoAspNetCore2_2.Uteis
     da.Fill(dt);
     return dt;
 }
-
 // Polimorfismo para evitar problemas com Racker na Injeção de Dependência.
 public DataTable RetDatatable(SqlCommand cmd)
 {
