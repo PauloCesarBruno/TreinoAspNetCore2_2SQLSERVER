@@ -23,12 +23,12 @@ namespace TreinoAspNetCore2_2.Models
         public String Senha { get; set; }
 
         // Polimorfismo para evitar Ataque SQL-Injection esta feita na classe DAL.
-       public bool ValidarLogin()
+        public bool ValidarLogin()
         {
             string sql = $"Select Id, Nome From Login Where Email = '{Email}' And Senha = '{Senha}'";
-            DAL objDal = new DAL();
-            DataTable dt = objDal.RetDatatable(sql);
-            if (dt.Rows.Count ==1)
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDatatable(sql);
+            if (dt.Rows.Count == 1)
             {
                 Id = dt.Rows[0]["Id"].ToString();
                 Nome = dt.Rows[0]["Nome"].ToString();
