@@ -31,23 +31,23 @@ namespace TreinoAspNetCore2_2.Models
                      
 
         // Método para carregar 
-        public List<ClienteModel> ListarTodosClientes()
+       public List<ClienteModel> ListarTodosClientes()
         {
             try
             {
                 List<ClienteModel> lista = new List<ClienteModel>();
                 ClienteModel item;
                 DAL objDAL = new DAL();
-                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "Carregar");
                 objDAL.LimparParametros();
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "Carregar");
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     item = new ClienteModel()
                     {
-                        Id = dt.Rows [i]["Id"].ToString(),
-                        Nome = dt.Rows[i]["Nome"].ToString(),
-                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        Id = dt.Rows[i]["Id"].ToString(),
+                        Nome = dt.Rows [i]["Nome"].ToString(),
+                        CPF = dt.Rows [i]["CPF"].ToString(),
                         DataNascimento = dt.Rows [i]["DataNascimento"].ToString(),
                         LimiteDeCredito = Convert.ToDecimal (dt.Rows [i]["LimiteDeCredito"])
                     };
@@ -63,21 +63,21 @@ namespace TreinoAspNetCore2_2.Models
         }
 
         // Método para carregar as informações para Edição
-       public ClienteModel RetornarCliente(int? Id)
+        public ClienteModel RetornarCliente(int? Id)
         {
             try
             {
-                ClienteModel item;
                 DAL objDAL = new DAL();
+                ClienteModel item;
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                DataTable dt = objDAL .ExecutaConsulta (CommandType.StoredProcedure, "CarregarPorId");
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
 
                 item = new ClienteModel()
                 {
-                    Id = dt.Rows[0]["Id"].ToString(),
+                    Id = dt.Rows [0]["Id"].ToString(),
                     Nome = dt.Rows [0]["Nome"].ToString(),
-                    CPF = dt.Rows[0]["CPF"].ToString(),
+                    CPF = dt.Rows [0]["CPF"].ToString(),
                     DataNascimento = dt.Rows [0]["DataNascimento"].ToString(),
                     LimiteDeCredito = Convert.ToDecimal (dt.Rows [0]["LimiteDeCredito"])
                 };
@@ -97,8 +97,8 @@ namespace TreinoAspNetCore2_2.Models
             {
                 string sql = string.Empty;
                 DAL objDAL = new DAL();
-
-                if(Id != null)
+                
+                if(Id !=null)
                 {
                     objDAL.LimparParametros();
                     objDAL.AddParametros("@Id", Id);
@@ -106,37 +106,38 @@ namespace TreinoAspNetCore2_2.Models
                     objDAL.AddParametros("@CPF", CPF);
                     objDAL.AddParametros("@DataNascimento", DataNascimento);
                     objDAL.AddParametros("@LimiteDeCredito", LimiteDeCredito);
-                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Alterar").ToString();
+                    String Idcliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Alterar").ToString();
                     objDAL.FecharConexao();
                 }
                 else
                 {
                     objDAL.LimparParametros();
-                    // Não tem necessidade de Id, pois é chave primaria AUTO INCREMENTO.
+                    //Não há necessidade do Id, pois o mesmo é chave primária.
                     objDAL.AddParametros("@Nome", Nome);
                     objDAL.AddParametros("@CPF", CPF);
                     objDAL.AddParametros("@DataNascimento", DataNascimento);
                     objDAL.AddParametros("@LimiteDeCredito", LimiteDeCredito);
-                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Inserir").ToString();
+                    // Usando Texo ao invés de S.Procedure, conforme permitido na classe DAL.
+                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Insert Into Clientes (Nome, CPF, DataNascimento, LimiteDeCredito) Values (@Nome, @CPF, @DataNascimento, @LimiteDeCredito)").ToString ();
                     objDAL.FecharConexao();
+
                 }
             }
-            catch (Exception ex)
+            catch (Exception) // estou usando não só S.P., mas também Texto, se não seria-> catch (Exception ex).
             {
-                throw new Exception(ex.Message);
+               // throw new Exception(ex.Message);
             }
-        }
+       }
 
         // Método para Excluir Registro
-        public void Excluir (int? Id)
+       public void Excluir(int? Id)
         {
             try
             {
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                // Exemplo do uso de texto ao invéz de S.Procedure como permite a classe DAL.
-                String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Delete From Clientes Where Id=@Id").ToString();
+                String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Excluir").ToString();
                 objDAL.FecharConexao();
             }
             catch (Exception ex)
