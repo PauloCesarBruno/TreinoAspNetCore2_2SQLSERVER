@@ -21,6 +21,14 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
      
+    <style >
+        .navbar-brand{
+            font-size: 35px;
+            font-family:'Monotype Corsiva';
+            text-align:left;
+        } 
+    </style>
+
 </head>
 
 <!--Abaixo chamada da função Java Script "CarregaUsuarioLogado()"
@@ -30,22 +38,19 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="fa fa-home"></span>  TreinoAspNetCore2.2</a>
+                <a style="text-decoration: underline; font-family:'Monotype Corsiva'; font-size:25px;" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Menu">Menu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Menu">Menu</a>
-                        </li>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">            
 
                         <!--Abaixo Rotina de Injeção de dependência que esta referenciado
-                            no "Startup.cs da solução-->
+                no "Startup.cs da solução-->
                         @using Microsoft.AspNetCore.Http
                         @inject IHttpContextAccessor HttpContextAccessor
                         <!--A div abaixo com o Id é que vai trazer o nome do usuário logado
-                            que esta na função Java Script no final deste template master-->
+                que esta na função Java Script no final deste template master-->
                         <div id="NomeUsuarioLogado"></div>
                     </ul>
                 </div>
@@ -131,7 +136,7 @@
                 var divNome = document.getElementById("NomeUsuarioLogado");
                 //Abaixo a concatenação sair volta para o Login e quebra a cessão.
                 divNome.innerHTML = "Logado: " + nome + " <a href='../Home/Login/0'><strong><em>(Sair)<em/><strong/><a/>";
-                divNome.style ="color:red; padding-top: 10px; margin-left: 118px; font-size: 12px;"
+                divNome.style ="color:red; padding-top: 4px; margin-left: 118px; font-size: 12px;"
             }
             else { // Usuário não logado
                 window.location.href = '../Home/Login';// Rotina para que o usuário não entre por fora.
