@@ -17,11 +17,11 @@ namespace TreinoAspNetCore2_2.Uteis
         public static readonly String User = "sa";
         public static readonly String Password = "Paradoxo22";
 
-        public static readonly String sql = $"Server = {Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
+        public static readonly String sqlString = $"Server = {Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
 
         public SqlConnection Conexao()
         {
-            return new SqlConnection(sql);
+            return new SqlConnection(sqlString);
         }
         public void FecharConexao()
         {
@@ -39,7 +39,7 @@ namespace TreinoAspNetCore2_2.Uteis
             Colecao.Add(new SqlParameter(nome, valor));
         }
 
-        public Object ExecutaManipulacao(CommandType commandType, String SP_Ou_Texto)
+        public Object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
         {
             try
             {
@@ -47,10 +47,10 @@ namespace TreinoAspNetCore2_2.Uteis
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
                 cmd.CommandType = commandType;
-                cmd.CommandText = SP_Ou_Texto;
+                cmd.CommandText = Sp_Ou_Texto;
                 cmd.CommandTimeout = 3600;
 
-                foreach(SqlParameter param in Colecao)
+                foreach (SqlParameter param in Colecao)
                 {
                     cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
                 }
@@ -62,7 +62,7 @@ namespace TreinoAspNetCore2_2.Uteis
             }
         }
 
-        public DataTable ExecutaConsulta(CommandType commandType, String Sp_Ou_Texto)
+        public DataTable ExecutaConsulta (CommandType commandType, String Sp_Ou_Texto)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
                 return dt;
-            }
+            } 
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -104,7 +104,7 @@ namespace TreinoAspNetCore2_2.Uteis
         }
 
         // Polimorfismo para evitar problemas com Racker na Injeção de Dependência.
-        public DataTable RetDatatable(SqlCommand cmd)
+       public DataTable RetDatatable(SqlCommand cmd)
         {
             DataTable dt = new DataTable();
             cmd.Connection = Conexao();
