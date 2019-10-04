@@ -17,11 +17,11 @@ namespace TreinoAspNetCore2_2.Uteis
         public static readonly String User = "sa";
         public static readonly String Password = "Paradoxo22";
 
-        public static readonly String sqlString = $"Server = {Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
+        public static readonly String SqlString = $"Server ={Server}; Database = {Database}; Uid = {User}; Pwd ={Password}";
 
         public SqlConnection Conexao()
         {
-            return new SqlConnection(sqlString);
+            return new SqlConnection(SqlString);
         }
         public void FecharConexao()
         {
@@ -62,7 +62,7 @@ namespace TreinoAspNetCore2_2.Uteis
             }
         }
 
-        public DataTable ExecutaConsulta (CommandType commandType, String Sp_Ou_Texto)
+        public DataTable ExecutaConsulta(CommandType commandType, String Sp_Ou_Texto)
         {
             try
             {
@@ -81,13 +81,13 @@ namespace TreinoAspNetCore2_2.Uteis
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
                 return dt;
-            } 
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-      
+
         //========================================================================//
         //Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo//
 
@@ -104,7 +104,7 @@ namespace TreinoAspNetCore2_2.Uteis
         }
 
         // Polimorfismo para evitar problemas com Racker na Injeção de Dependência.
-       public DataTable RetDatatable(SqlCommand cmd)
+        public DataTable RetDatatable(SqlCommand cmd)
         {
             DataTable dt = new DataTable();
             cmd.Connection = Conexao();
@@ -114,6 +114,7 @@ namespace TreinoAspNetCore2_2.Uteis
         }
     }
 }
+
 
 /*public DataTable RetDatatable(String sql)
 {
