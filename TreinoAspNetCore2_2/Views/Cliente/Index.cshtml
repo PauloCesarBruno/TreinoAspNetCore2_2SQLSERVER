@@ -2,39 +2,38 @@
 <br />
 <h3>Lista de Clientes</h3>
 
-<div class=" container">
+<div class="container">
     <div class="table-responsive">
-        <table class=" table-bordered">
-          <thead>
-              <tr>
-                  <td></td>
-                  <td></td>
-                  <td style="padding: 0px 20px 0px 20px;">Id</td>
-                  <td style="padding: 0px 20px 0px 20px;">Nome</td>
-                  <td style="padding: 0px 20px 0px 20px;">CPF</td>
-                  <td style="padding: 0px 20px 0px 20px;">Data. Nasc.</td>
-                  <td style="padding: 0px 20px 0px 20px;">Limite</td>
-              </tr>
-          </thead>
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="padding: 0px 20px 0px 20px;">Id</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nome</td>
+                    <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
+                    <td style="padding: 0px 20px 0px 20px;">Limite</td>
+                </tr>
+            </thead>
+
 
             <tbody>
-    
+                @{
+                    foreach (var Item in (List<ClienteModel>)ViewBag.ListaClientes)
+                    {
+                        <tr>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@Item.Id)">Editar</button></td>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@Item.Id)">Excluir</button></td>
 
-@{
-    foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
-    {
-        <tr>
-            <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
-            <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
-
-            <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
-            <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
-            <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
-            <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
-            <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
-        </tr>
-    }
-}
+                            <td style="padding: 0px 20px 0px 20px;">@Item.Id</td>
+                            <td style="padding: 0px 20px 0px 20px;">@Item.Nome</td>
+                            <td style="padding: 0px 20px 0px 20px;">@Item.CPF</td>
+                            <td style="padding: 0px 20px 0px 20px;">@Item.DataNascimento</td>
+                            <td style="padding: 0px 20px 0px 20px;">R$ @Item.LimiteDeCredito</td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
@@ -70,3 +69,16 @@
         window.location.href = '../../Home/Menu';
     }
 </script>
+
+<!--Padding´s dos butões e da tabela-->
+<!--=========================================-->
+<!--style="padding:2PX;"-->
+<!--style="padding: 0px 20px 0px 20px;"-->
+
+
+
+<!--Funções em Java Script para direcionamento-->
+<!--=========================================-->
+<!-- Função em JS para Cadastrar-->
+<!-- Função em JS para Cadastrar-->
+<!-- Função em JS para Cadastrar-->

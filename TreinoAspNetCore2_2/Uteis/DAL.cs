@@ -17,17 +17,18 @@ namespace TreinoAspNetCore2_2.Uteis
         public static readonly String User = "sa";
         public static readonly String Password = "Paradoxo22";
 
-        public static readonly String SqlString = $"Server ={Server}; Database = {Database}; Uid = {User}; Pwd ={Password}";
+        public static readonly String sqlString = $"Server = {Server}; Database = {Database}; Uid = {User}; Pwd = {Password}";
 
         public SqlConnection Conexao()
         {
-            return new SqlConnection(SqlString);
+            return new SqlConnection(sqlString);
         }
         public void FecharConexao()
         {
             SqlConnection conn = Conexao();
             conn.Close();
         }
+
         private SqlParameterCollection Colecao = new SqlCommand().Parameters;
 
         public void LimparParametros()
@@ -87,15 +88,15 @@ namespace TreinoAspNetCore2_2.Uteis
                 throw new Exception(ex.Message);
             }
         }
-
         //========================================================================//
         //Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo//
 
 
         // Espera um parâmetro do tipo string
         // contendo um conteudo SQL do tipo SELECT
-        public DataTable RetDatatable(String sql)
+        public DataTable RetDatatable (String sql)
         {
+            DAL objDAL = new DAL();
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(sql, Conexao());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
