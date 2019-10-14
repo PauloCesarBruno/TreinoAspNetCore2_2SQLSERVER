@@ -1,6 +1,8 @@
 ﻿<br />
-<br />
+
 <h3>Lista de Clientes</h3>
+
+<br />
 
 <div class="container">
     <div class="table-responsive">
@@ -15,12 +17,12 @@
                     <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
                     <td style="padding: 0px 20px 0px 20px;">Limite</td>
                 </tr>
+
             </thead>
-
-
+           
             <tbody>
                 @{
-                    foreach (var Item in (List<ClienteModel>)ViewBag.ListaClientes)
+                    @foreach (var Item in (List<ClienteModel>)ViewBag.ListaClientes)
                     {
                         <tr>
                             <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@Item.Id)">Editar</button></td>
@@ -36,14 +38,49 @@
                 }
             </tbody>
         </table>
+
+        <br />
+
+        <button type ="button" class="btn btn-block btn-success" onclick="Cadastrar()">Cadastrar Cliente</button>
+
+        <script>
+            // Função em JS para Cadastrar
+            function Cadastrar() {
+                window.location.href = "../Cliente/Cadastro";
+            }
+
+             // Função em JS para Editar
+            function Editar(Id) {
+                window.location.href = "../Cliente/Cadastro/" + Id;
+            }
+
+            // Função em JS para Excluir
+            function Excluir(Id) {
+                window.location.href = "../Cliente/Excluir/" + Id;
+            }
+
+             // Função em JS para Voltar ao Menu
+            function Voltar() {
+                window.location.href = "../Home/Menu";
+            }
+        </script>
+
+        <br />
+
+        <button type ="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
+
     </div>
 </div>
 
-<br />
-<button class="btn btn-block btn-success" type="button" onclick="Cadastrar()">Cadastrar Cliente</button>
 
-<br />
-<script>
+<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
+<!--Padding´s dos butões e da tabela-->
+<!--=========================================-->
+<!--style="padding:2PX;"-->
+<!--style="padding: 0px 20px 0px 20px;"-->
+<!--====================================================================-->
+<!--Funções em Java Script para direcionamento-->
+<!--<script>
 
     // Função em JS para Cadastrar
     function Cadastrar() {
@@ -59,26 +96,12 @@
     function Excluir(Id) {
         window.location.href = "../Cliente/Excluir/" + Id;
     }
-</script>
 
-<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
-<button type="button" class="btn  btn-info" onclick="Voltar()">Retornar para o Menu</button>
-
-<script>
+    // Função em JS para Voltar ao Menu
     function Voltar() {
         window.location.href = '../../Home/Menu';
     }
-</script>
-
-<!--Padding´s dos butões e da tabela-->
-<!--=========================================-->
-<!--style="padding:2PX;"-->
-<!--style="padding: 0px 20px 0px 20px;"-->
-
-
-
-<!--Funções em Java Script para direcionamento-->
-<!--=========================================-->
-<!-- Função em JS para Cadastrar-->
-<!-- Função em JS para Cadastrar-->
-<!-- Função em JS para Cadastrar-->
+</script>-->
+<!--====================================================================-->
+<!--<button class="btn btn-block btn-success" type="button" onclick="Cadastrar()">Cadastrar Cliente</button>-->
+<!--<button type="button" class="btn  btn-info" onclick="Voltar()">Retornar para o Menu</button>-->

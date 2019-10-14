@@ -36,12 +36,14 @@ namespace TreinoAspNetCore2_2.Controllers
                 /*Abaixo cria-se uma variável booleana que verifica se deu tudo certo no login,
                  * caso contrário no "else" é criada uma variavel temporária
                  * (TempData["ErrorLogin"] = "E-Mail ou Senha Incorreto(s), favor verificar!";) 
-                 * que vai levar o aviso de erro para a View Login,cshtml.*/
+                 * que vai levar o aviso de erro para a View Login.cshtml.*/
                 bool loginOK = login.ValidarLogin();
                 if (loginOK)
                 {
+                    // Abaixo estão as variáveis de Seção da minha Session.
                     HttpContext.Session.SetString("IdUsuarioLogado", login.Id);
                     HttpContext.Session.SetString("NomeUsuarioLogado", login.Nome);
+                    //Após logado redireciona Para a Pagina de Início da aplicação.
                     return RedirectToAction("Index", "Home");
                 }
                 else

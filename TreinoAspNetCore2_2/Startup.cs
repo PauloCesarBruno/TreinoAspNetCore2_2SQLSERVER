@@ -32,8 +32,8 @@ namespace TreinoAspNetCore2_2
             
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //Adicionar os serviços Abaixo (Injeção de dependência)
-            // Configurando o Host para que ele faça uso de seccion.
+            //Adicionar os serviços Abaixo (Uso de Session)
+            // Configurando o Host para que ele faça uso de Seccion.
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
@@ -53,7 +53,7 @@ namespace TreinoAspNetCore2_2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession(); //Adicionados para trabalhar com Sessions (injeção de depêndencia)
+            app.UseSession(); //Adicionados para trabalhar com Sessions.
             app.UseCookiePolicy();
 
             // Sempre que tiver um Login, Alterar a Rota (routes.MapRoute) para o Login.

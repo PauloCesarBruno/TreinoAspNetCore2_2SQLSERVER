@@ -28,7 +28,6 @@ namespace TreinoAspNetCore2_2.Uteis
             SqlConnection conn = Conexao();
             conn.Close();
         }
-
         private SqlParameterCollection Colecao = new SqlCommand().Parameters;
 
         public void LimparParametros()
@@ -89,14 +88,14 @@ namespace TreinoAspNetCore2_2.Uteis
             }
         }
         //========================================================================//
-        //Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo//
+        /*Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo,
+         * esta rotina também é para o uso da Session*/
 
 
         // Espera um parâmetro do tipo string
         // contendo um conteudo SQL do tipo SELECT
-        public DataTable RetDatatable (String sql)
+       public DataTable RetDatatable(String sql)
         {
-            DAL objDAL = new DAL();
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(sql, Conexao());
             SqlDataAdapter da = new SqlDataAdapter(cmd);

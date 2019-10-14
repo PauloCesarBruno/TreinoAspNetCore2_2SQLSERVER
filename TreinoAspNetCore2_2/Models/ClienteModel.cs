@@ -30,7 +30,7 @@ namespace TreinoAspNetCore2_2.Models
         public Decimal? LimiteDeCredito { get; set; }
 
 
-        public List<ClienteModel> ListarTodosClientes()
+        public List <ClienteModel> ListarTodosClientes()
         {
             try
             {
@@ -44,11 +44,11 @@ namespace TreinoAspNetCore2_2.Models
                 {
                     item = new ClienteModel()
                     {
-                        Id = dt.Rows[i]["Id"].ToString(),
-                        Nome = dt.Rows[i]["Nome"].ToString(),
+                        Id = dt.Rows [i]["Id"].ToString(),
+                        Nome = dt.Rows [i]["Nome"].ToString(),
                         CPF = dt.Rows[i]["CPF"].ToString(),
-                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
-                        LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
+                        DataNascimento = dt.Rows [i]["DataNascimento"].ToString(),
+                        LimiteDeCredito = Convert .ToDecimal (dt.Rows [i]["LimiteDeCredito"])
                     };
                     lista.Add(item);
                     objDAL.FecharConexao();
@@ -67,18 +67,18 @@ namespace TreinoAspNetCore2_2.Models
             try
             {
                 DAL objDAL = new DAL();
+                ClienteModel Item;
                 objDAL.LimparParametros();
                 objDAL.AddParametros("@Id", Id);
-                ClienteModel Item;
                 DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
 
                 Item = new ClienteModel()
                 {
                     Id = dt.Rows[0]["Id"].ToString(),
                     Nome = dt.Rows[0]["Nome"].ToString(),
-                    CPF = dt.Rows[0]["CPF"].ToString(),
+                    CPF = dt.Rows [0]["CPF"].ToString(),
                     DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal(dt.Rows[0]["LimiteDeCredito"])
+                    LimiteDeCredito = Convert.ToDecimal (dt.Rows [0]["LimiteDeCredito"])
                 };
                 objDAL.FecharConexao();
                 return Item;
@@ -96,8 +96,8 @@ namespace TreinoAspNetCore2_2.Models
             {
                 string sql = string.Empty;
                 DAL objDAL = new DAL();
-
-                if (Id != null)
+                
+                if(Id != null)
                 {
                     objDAL.LimparParametros();
                     objDAL.AddParametros("@Id", Id);

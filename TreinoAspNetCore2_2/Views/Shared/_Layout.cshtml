@@ -32,7 +32,8 @@
 </head>
 
 <!--Abaixo chamada da função Java Script "CarregaUsuarioLogado()"
-    que esta no final deste template master-->
+    que esta no final deste template master para Imprimir na tela
+    o usuario logado na Session-->
 <body onload="CarregaUsuarioLogado()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -45,8 +46,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">            
 
-                        <!--Abaixo Rotina de Injeção de dependência que esta referenciado
-                no "Startup.cs da solução-->
+                <!--Abaixo Rotina de Injeção de dependência que esta referenciado
+                no "Startup.cs da solução Para Injetar dependência na Session-->
                         @using Microsoft.AspNetCore.Http
                         @inject IHttpContextAccessor HttpContextAccessor
                         <!--A div abaixo com o Id é que vai trazer o nome do usuário logado
@@ -125,7 +126,7 @@
 
     @RenderSection("Scripts", required: false)
 
-    <!--Abaixo a função em Java Script que pega o nome do usuário logao, valida, concatena e
+    <!--Abaixo a função em Java Script que pega o nome do usuário logado, valida, concatena e
        define o estilo, tipo cor, posicionamento etc...-->
     <script>
         function CarregaUsuarioLogado()
@@ -139,7 +140,7 @@
                 divNome.style ="color:red; padding-top: 4px; margin-left: 118px; font-size: 12px;"
             }
             else { // Usuário não logado
-                window.location.href = '../Home/Login';// Rotina para que o usuário não entre por fora.
+                window.location.href = '../Home/Login';// Rotina forçar a rota pro Menu se Usuário não Logado.
             }
         }
     </script>

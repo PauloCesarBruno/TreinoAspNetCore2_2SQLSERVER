@@ -11,8 +11,8 @@ namespace TreinoAspNetCore2_2.Models
 {
     public class LoginModel
     {
-        public String Id { get; set; }
-        public String Nome { get; set; }
+        public String Id { get; set; } // Uso  Para Session
+        public String Nome { get; set; } // Uso  Para Session
 
 
         [Required(ErrorMessage = "E-Mail obrigatório!")]
@@ -23,13 +23,13 @@ namespace TreinoAspNetCore2_2.Models
         public String Senha { get; set; }
 
         // Polimorfismo para evitar Ataque SQL-Injection esta feita na classe DAL.
+        // Também uma Rotina se Session
         public bool ValidarLogin()
         {
             String sql = $"Select Id, Nome From Login Where Email = '{Email}' And Senha = '{Senha}'";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDatatable(sql);
-
-            if(dt.Rows.Count ==1)
+            if (dt.Rows.Count ==1)
             {
                 Id = dt.Rows[0]["Id"].ToString();
                 Nome = dt.Rows[0]["Nome"].ToString();
