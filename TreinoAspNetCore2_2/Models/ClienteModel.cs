@@ -38,7 +38,8 @@ namespace TreinoAspNetCore2_2.Models
                 DAL objDAL = new DAL();
                 ClienteModel item;
                 objDAL.LimparParametros();
-                DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "Carregar");
+                // Usando Texto como permite a Classe DAL e uma View (VClientes) Criada no BD.
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select * From VClientes");
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -151,3 +152,5 @@ namespace TreinoAspNetCore2_2.Models
 // Usando Texo ao invés de S.Procedure, conforme permitido na classe DAL.
 
 // estou usando não só S.P., mas também Texto, se não seria-> catch (Exception ex).
+
+// Usando Texto como permite a Classe DAL e uma View (VClientes) Criada no BD.
