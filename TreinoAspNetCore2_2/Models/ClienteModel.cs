@@ -91,7 +91,7 @@ namespace TreinoAspNetCore2_2.Models
         }
 
         // Método para Inserir ou Alterar (INSERT OU UPDATE)
-       public void 
+       public void Gravar()
         {
             try
             {
