@@ -53,29 +53,30 @@ namespace TreinoAspNetCore2_2.Controllers
 
         #endregion
 
+        // Crio uma "ViewBag", istancio a classe (ClienteModel()) e chamo o método...
         public IActionResult Index()
         {
-            // Crio uma "ViewBag", istancio a classe (ClienteModel()) e chamo o método...
             ViewBag.ListaClientes = new ClienteModel().ListarTodosClientes();
             return View();
         }
 
         [HttpGet]
+        // Crio uma "ViewBag", instancio a classe (ClienteModel()) e chamo o método
+        // com o Id como parâmetro.
         public IActionResult Cadastro(int? Id)
         {
             if (Id != null)
             {
-                // Crio uma "ViewBag", istancio a classe (ClienteModel()) e chamo o método
-                // com o Id como parâmetro.
                 ViewBag.Cliente = new ClienteModel().RetornarCliente(Id);
             }
             return View();
         }
 
         [HttpPost]
+        // No parâmetro desse método instancio a classe (ClienteModel()) criando um objeto (cliente)
         public IActionResult Cadastro(ClienteModel cliente)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 cliente.Gravar();
                 return RedirectToAction("Index");

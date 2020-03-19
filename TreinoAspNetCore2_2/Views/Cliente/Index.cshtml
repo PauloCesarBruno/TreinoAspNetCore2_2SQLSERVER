@@ -8,6 +8,7 @@
     <div class="table-responsive">
         <table class="table-bordered">
             <thead>
+
                 <tr>
                     <td></td>
                     <td></td>
@@ -19,20 +20,21 @@
                 </tr>
 
             </thead>
-           
+
             <tbody>
-                @{
-                    @foreach (var Item in (List<ClienteModel>)ViewBag.ListaClientes)
+                @{ 
+                    @foreach (var item in(List<ClienteModel>)ViewBag.ListaClientes)
                     {
                         <tr>
-                            <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@Item.Id)">Editar</button></td>
-                            <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@Item.Id)">Excluir</button></td>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
 
-                            <td style="padding: 0px 20px 0px 20px;">@Item.Id</td>
-                            <td style="padding: 0px 20px 0px 20px;">@Item.Nome</td>
-                            <td style="padding: 0px 20px 0px 20px;">@Item.CPF</td>
-                            <td style="padding: 0px 20px 0px 20px;">@Item.DataNascimento</td>
-                            <td style="padding: 0px 20px 0px 20px;">R$ @Item.LimiteDeCredito</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                                <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
+
                         </tr>
                     }
                 }
@@ -41,7 +43,7 @@
 
         <br />
 
-        <button type ="button" class="btn btn-block btn-success" onclick="Cadastrar()">Cadastrar Cliente</button>
+        <button type="button" class="btn btn-block btn-success" onclick="Cadastrar()">Cadastrar Cliente</button>
 
         <script>
             // Função em JS para Cadastrar
@@ -49,7 +51,7 @@
                 window.location.href = "../Cliente/Cadastro";
             }
 
-             // Função em JS para Editar
+            // Função em JS para Editar
             function Editar(Id) {
                 window.location.href = "../Cliente/Cadastro/" + Id;
             }
@@ -59,7 +61,7 @@
                 window.location.href = "../Cliente/Excluir/" + Id;
             }
 
-             // Função em JS para Voltar ao Menu
+            // Função em JS para voltar ao Menu
             function Voltar() {
                 window.location.href = "../Home/Menu";
             }
@@ -67,11 +69,10 @@
 
         <br />
 
-        <button type ="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
+        <button type="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
 
     </div>
 </div>
-
 
 <!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
 <!--Padding´s dos butões e da tabela-->
