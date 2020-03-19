@@ -46,13 +46,13 @@ namespace TreinoAspNetCore2_2.Models
                     item = new ClienteModel()
                     {
                         Id = dt.Rows[i]["Id"].ToString(),
-                        Nome = dt.Rows [i]["Nome"].ToString(),
+                        Nome = dt.Rows[i]["Nome"].ToString(),
                         CPF = dt.Rows[i]["CPF"].ToString(),
-                        DataNascimento = dt.Rows [i]["DataNascimento"].ToString(),
+                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
                         LimiteDeCredito = Convert.ToDecimal (dt.Rows[i]["LimiteDeCredito"])
                     };
                     lista.Add(item);
-                    objDAL.FecharConexao();
+                    objDAL.FecharConexao();                    
                 }
                 return lista;
             }
@@ -62,7 +62,7 @@ namespace TreinoAspNetCore2_2.Models
             }
         }
 
-        // Método para carregar as informações para Edição
+       // Método para carregar as informações para Edição
        public ClienteModel RetornarCliente(int? Id)
         {
             try
@@ -76,10 +76,10 @@ namespace TreinoAspNetCore2_2.Models
                 item = new ClienteModel()
                 {
                     Id = dt.Rows[0]["Id"].ToString(),
-                    Nome = dt.Rows [0]["Nome"].ToString(),
+                    Nome = dt.Rows[0]["Nome"].ToString(),
                     CPF = dt.Rows[0]["CPF"].ToString(),
-                    DataNascimento = dt.Rows [0]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal (dt.Rows [0]["LimiteDeCredito"])
+                    DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
+                    LimiteDeCredito = Convert.ToDecimal (dt.Rows[0]["LimiteDeCredito"])
                 };
                 objDAL.FecharConexao();
                 return item;
@@ -90,45 +90,45 @@ namespace TreinoAspNetCore2_2.Models
             }
         }
 
-        // Método para Inserir ou Alterar (INSERT OU UPDATE)
+       // Método para Inserir ou Alterar (INSERT OU UPDATE)
        public void Gravar()
         {
             try
             {
-                DAL objDAL = new DAL();
-                string sql = string.Empty;
+                DAL objDAl = new DAL();
 
-                if(Id != null)
+                if (Id != null)
                 {
-                    objDAL.LimparParametros();
-                    objDAL.AddParametros("Id", Id);
-                    objDAL.AddParametros("Nome", Nome);
-                    objDAL.AddParametros("CPF", CPF);
-                    objDAL.AddParametros("DataNascimento", DataNascimento);
-                    objDAL.AddParametros("LimiteDeCredito", LimiteDeCredito);
-                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.StoredProcedure, "Alterar").ToString();
-                    objDAL.FecharConexao();
+                    objDAl.LimparParametros();
+                    objDAl.AddParametros("Id", Id);
+                    objDAl.AddParametros("Nome", Nome);
+                    objDAl.AddParametros("CPF", CPF);
+                    objDAl.AddParametros("DataNascimento", DataNascimento);
+                    objDAl.AddParametros("LimiteDeCredito", LimiteDeCredito);
+                    String IdCliente = objDAl.ExecutaManipulacao(CommandType.StoredProcedure, "Alterar").ToString();
+                    objDAl.FecharConexao();
                 }
                 else
                 {
-                    objDAL.LimparParametros();
+                    objDAl.LimparParametros();
                     //Não há necessidade do Id, pois o mesmo é chave primária.
-                    objDAL.AddParametros("Nome", Nome);
-                    objDAL.AddParametros("CPF", CPF);
-                    objDAL.AddParametros("DataNascimento", DataNascimento);
-                    objDAL.AddParametros("LimiteDeCredito", LimiteDeCredito);
+                    objDAl.AddParametros("Nome", Nome);
+                    objDAl.AddParametros("CPF", CPF);
+                    objDAl.AddParametros("DataNascimento", DataNascimento);
+                    objDAl.AddParametros("LimiteDeCredito", LimiteDeCredito);
                     // Usando Texo ao invés de S.Procedure, conforme permitido na classe DAL.
-                    String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Insert Into Clientes (Nome, CPF, DataNascimento, LimiteDeCredito) Values (@Nome, @CPF, @DataNascimento, @LimiteDeCredito)").ToString();
-                    objDAL.FecharConexao();
+                    String IdCliente = objDAl.ExecutaManipulacao(CommandType.Text, "Insert Into Clientes (Nome, CPF, DataNascimento, LimiteDeCredito) Values (@Nome, @CPF, @DataNascimento, @LimiteDeCredito)").ToString();
+                    objDAl.FecharConexao();
                 }
             }
             // estou usando não só S.P., mas também Texto, se não seria-> catch (Exception ex).
-            catch (Exception) 
+            catch (Exception)
             {
                // throw new Exception(ex.Message);
             }
         }
-        // Método para Excluir Registro
+
+       // Método para Excluir Registro
        public void Excluir(int? Id)
         {
             try

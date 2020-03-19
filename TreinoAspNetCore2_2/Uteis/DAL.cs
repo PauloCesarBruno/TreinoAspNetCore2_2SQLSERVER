@@ -23,17 +23,20 @@ namespace TreinoAspNetCore2_2.Uteis
         {
             return new SqlConnection(sqlString);
         }
+
         public void FecharConexao()
         {
             SqlConnection conn = Conexao();
             conn.Close();
         }
+
         private SqlParameterCollection Colecao = new SqlCommand().Parameters;
 
         public void LimparParametros()
         {
             Colecao.Clear();
         }
+
         public void AddParametros(String nome, Object valor)
         {
             Colecao.Add(new SqlParameter(nome, valor));
@@ -87,6 +90,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 throw new Exception(ex.Message);
             }
         }
+
         //========================================================================//
         /*Abaixo rotina para trabalhar com Login, como o polimorfismo por exemplo,
          * esta rotina também é para o uso da Session*/
