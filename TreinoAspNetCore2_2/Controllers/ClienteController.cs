@@ -55,6 +55,7 @@ namespace TreinoAspNetCore2_2.Controllers
 
         public IActionResult Index()
         {
+            // Crio uma "ViewBag", istancio a classe (ClienteModel()) e chamo o método...
             ViewBag.ListaClientes = new ClienteModel().ListarTodosClientes();
             return View();
         }
@@ -64,7 +65,8 @@ namespace TreinoAspNetCore2_2.Controllers
         {
             if (Id != null)
             {
-                // Carregar o registro do cliente numa ViewBag
+                // Crio uma "ViewBag", istancio a classe (ClienteModel()) e chamo o método
+                // com o Id como parâmetro.
                 ViewBag.Cliente = new ClienteModel().RetornarCliente(Id);
             }
             return View();
