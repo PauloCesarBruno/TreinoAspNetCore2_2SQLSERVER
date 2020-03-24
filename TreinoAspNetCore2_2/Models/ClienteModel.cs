@@ -35,9 +35,9 @@ namespace TreinoAspNetCore2_2.Models
             try
             {
                 List<ClienteModel> lista = new List<ClienteModel>();
-                ClienteModel item;
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
+                ClienteModel item;
                 // Usando Texto como permite a Classe DAL e uma View (VClientes) Criada no BD.
                 DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select * from VClientes");
 
@@ -52,8 +52,9 @@ namespace TreinoAspNetCore2_2.Models
                         LimiteDeCredito = Convert.ToDecimal (dt.Rows[i]["LimiteDeCredito"])
                     };
                     lista.Add(item);
-                    objDAL.FecharConexao();                    
+                    objDAL.FecharConexao();
                 }
+
                 return lista;
             }
             catch (Exception ex)
@@ -79,7 +80,7 @@ namespace TreinoAspNetCore2_2.Models
                     Nome = dt.Rows[0]["Nome"].ToString(),
                     CPF = dt.Rows[0]["CPF"].ToString(),
                     DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal (dt.Rows[0]["LimiteDeCredito"])
+                    LimiteDeCredito = Convert.ToDecimal(dt.Rows[0]["LimiteDeCredito"])
                 };
                 objDAL.FecharConexao();
                 return item;
@@ -91,7 +92,7 @@ namespace TreinoAspNetCore2_2.Models
         }
 
        // Método para Inserir ou Alterar (INSERT OU UPDATE)
-       public void Gravar()
+        public void Gravar()
         {
             try
             {
