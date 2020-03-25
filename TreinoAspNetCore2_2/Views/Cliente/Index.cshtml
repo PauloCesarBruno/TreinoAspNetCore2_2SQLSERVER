@@ -10,6 +10,7 @@
             <thead>
 
                 <tr>
+
                     <td></td>
                     <td></td>
                     <td style="padding: 0px 20px 0px 20px;">Id</td>
@@ -17,28 +18,34 @@
                     <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
                     <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
                     <td style="padding: 0px 20px 0px 20px;">Limite</td>
+
                 </tr>
 
             </thead>
 
             <tbody>
                 @{ 
-                    @foreach (var item in(List<ClienteModel>)ViewBag.ListaClientes)
+                    @foreach (var Item in (List<ClienteModel>)ViewBag.ListaClientes)
+
                     {
-                        <tr>
-                                <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
-                                <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+                <tr>
+                        <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@Item.Id)">Editar</button></td>
+                        <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@Item.Id)">Excluir</button></td>
 
-                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
-                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
-                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
-                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
-                                <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
+                        <td style="padding: 0px 20px 0px 20px;">@Item.Id</td>
+                        <td style="padding: 0px 20px 0px 20px;">@Item.Nome</td>
+                        <td style="padding: 0px 20px 0px 20px;">@Item.CPF</td>
+                        <td style="padding: 0px 20px 0px 20px;">@Item.DataNascimento</td>
+                        <td style="padding: 0px 20px 0px 20px;">R$ @Item.LimiteDeCredito</td>
 
-                        </tr>
+
+                </tr>
+
                     }
                 }
+
             </tbody>
+
         </table>
 
         <br />
@@ -56,18 +63,18 @@
                 window.location.href = "../Cliente/Cadastro/" + Id;
             }
 
-            // Função em JS para Excluir
-            function Excluir(Id) {
-                window.location.href = "../Cliente/Excluir/" + Id;
+             // Função em JS para Excluir
+            function Excluir(id) {
+                window.location.href = "../Cliente/Excluir/" + id;
             }
 
-            // Função em JS para voltar ao Menu
+             // Função em JS para Voltar ao Menu
             function Voltar() {
                 window.location.href = "../Home/Menu";
             }
         </script>
 
-        <br />
+        <br / >
 
         <button type="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
 

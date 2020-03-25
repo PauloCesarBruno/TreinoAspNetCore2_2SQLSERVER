@@ -37,9 +37,9 @@ namespace TreinoAspNetCore2_2.Uteis
             Colecao.Clear();
         }
 
-        public void AddParametros(String nome, Object valor)
+        public void AddParametros(String nome, Object Valor)
         {
-            Colecao.Add(new SqlParameter(nome, valor));
+            Colecao.Add(new SqlParameter(nome, Valor));
         }
 
         public Object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
