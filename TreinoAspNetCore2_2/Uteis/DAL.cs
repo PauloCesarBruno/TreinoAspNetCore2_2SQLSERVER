@@ -37,9 +37,9 @@ namespace TreinoAspNetCore2_2.Uteis
             Colecao.Clear();
         }
 
-        public void AddParametros(String nome, Object Valor)
+        public void AddParametros(String nome, Object valor)
         {
-            Colecao.Add(new SqlParameter(nome, Valor));
+            Colecao.Add(new SqlParameter(nome, valor));
         }
 
         public Object ExecutaManipulacao(CommandType commandType, String Sp_Ou_Texto)
@@ -53,7 +53,7 @@ namespace TreinoAspNetCore2_2.Uteis
                 cmd.CommandText = Sp_Ou_Texto;
                 cmd.CommandTimeout = 3600;
 
-                foreach (SqlParameter param in Colecao)
+                foreach(SqlParameter param in Colecao)
                 {
                     cmd.Parameters.Add(new SqlParameter(param.ParameterName, param.Value));
                 }

@@ -49,7 +49,7 @@ namespace TreinoAspNetCore2_2.Models
                         Nome = dt.Rows[i]["Nome"].ToString(),
                         CPF = dt.Rows[i]["CPF"].ToString(),
                         DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
-                        LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
+                        LimiteDeCredito = Convert.ToDecimal (dt.Rows[i]["LimiteDeCredito"])
                     };
                     lista.Add(item);
                     objDAL.FecharConexao();
@@ -68,9 +68,9 @@ namespace TreinoAspNetCore2_2.Models
             try
             {
                 DAL objDAL = new DAL();
+                ClienteModel item;
                 objDAL.LimparParametros();
                 objDAL.AddParametros("Id", Id);
-                ClienteModel item;
                 DataTable dt = objDAL.ExecutaConsulta(CommandType.StoredProcedure, "CarregarPorId");
 
                 item = new ClienteModel()
@@ -79,12 +79,12 @@ namespace TreinoAspNetCore2_2.Models
                     Nome = dt.Rows[0]["Nome"].ToString(),
                     CPF = dt.Rows[0]["CPF"].ToString(),
                     DataNascimento = dt.Rows[0]["DataNascimento"].ToString(),
-                    LimiteDeCredito = Convert.ToDecimal(dt.Rows[0]["LimiteDeCredito"])
+                    LimiteDeCredito = Convert.ToDecimal (dt.Rows[0]["LimiteDeCredito"])
                 };
                 objDAL.FecharConexao();
                 return item;
             }
-            catch (Exception ex)
+            catch  (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -97,7 +97,7 @@ namespace TreinoAspNetCore2_2.Models
             {
                 DAL objDAL = new DAL();
 
-                if (Id != null)
+                if(Id != null)
                 {
                     objDAL.LimparParametros();
                     objDAL.AddParametros("Id", Id);
@@ -116,20 +116,18 @@ namespace TreinoAspNetCore2_2.Models
                     objDAL.AddParametros("CPF", CPF);
                     objDAL.AddParametros("DataNascimento", DataNascimento);
                     objDAL.AddParametros("LimiteDeCredito", LimiteDeCredito);
-                    // Usando Texo ao invés de S.Procedure, conforme permitido na classe DAL.
                     String IdCliente = objDAL.ExecutaManipulacao(CommandType.Text, "Insert Into Clientes (Nome, CPF, DataNascimento, LimiteDeCredito) Values (@Nome, @CPF, @DataNascimento, @LimiteDeCredito)").ToString();
                     objDAL.FecharConexao();
                 }
             }
-            // estou usando não só S.P., mas também Texto, se não seria-> catch (Exception ex).
-            catch (Exception)
+            catch (Exception) // estou usando não só S.P., mas também Texto, se não seria-> catch (Exception ex).
             {
                 //throw new Exception(ex.Message);
             }
         }
 
        // Método para Excluir Registro
-       public void Excluir (int? Id)
+       public void Excluir(int? Id)
         {
             try
             {
