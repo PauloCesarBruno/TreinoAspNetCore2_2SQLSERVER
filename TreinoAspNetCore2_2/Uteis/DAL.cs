@@ -12,7 +12,7 @@ namespace TreinoAspNetCore2_2.Uteis
 {
     public class DAL
     {
-        public static readonly String Server = "LAPTOP-PP6GUSQU";
+        public static readonly String Server = "DESKTOP-HP0T53Q";
         public static readonly String Database = "TreinoASPCore2_2";
         public static readonly String User = "sa";
         public static readonly String Password = "Paradoxo22";
