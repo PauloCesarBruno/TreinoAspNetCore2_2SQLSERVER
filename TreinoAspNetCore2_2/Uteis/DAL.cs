@@ -21,7 +21,7 @@ namespace TreinoAspNetCore2_2.Uteis
 
         public SqlConnection Conexao()
         {
-            return new SqlConnection(sqlString)
+            return new SqlConnection(sqlString);
         }
 
         public void FecharConexao()
