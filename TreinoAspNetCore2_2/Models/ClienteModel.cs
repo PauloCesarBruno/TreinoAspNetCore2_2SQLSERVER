@@ -30,7 +30,45 @@ namespace TreinoAspNetCore2_2.Models
         public Decimal? LimiteDeCredito { get; set; }
 
 
-       public List<ClienteModel> ListarTodosClientes()
+        //==================================================================================
+        // Rotina para Atender filtro de clientes
+        public List<ClienteModel> ListagemClientes(string cpf)
+        {
+            return ListarTodosClientesCPF(cpf);
+        }
+
+
+        public List<ClienteModel> ListarTodosClientesCPF(string cpf)
+        {
+           
+                List<ClienteModel> lista = new List<ClienteModel>();
+                ClienteModel item;
+                DAL objDAL = new DAL();
+                objDAL.LimparParametros();
+                String sql = $"Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes Where CPF = '{cpf}'";
+                DataTable dt = objDAL.RetDatatable(sql);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    item = new ClienteModel()
+                    {
+                        Id = dt.Rows[i]["Id"].ToString(),
+                        Nome = dt.Rows[i]["Nome"].ToString(),
+                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
+                        LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
+                    };
+                    lista.Add(item);
+                    objDAL.FecharConexao();
+                }
+                return lista;                
+        }
+
+        // Fim da Rotina de Filtro
+        //==================================================================================
+
+
+        public List<ClienteModel> ListarTodosClientes()
         {
             try
             {
@@ -39,7 +77,7 @@ namespace TreinoAspNetCore2_2.Models
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 // Usando Texto como permite a Classe DAL e uma View (VClientes) Criada no BD.
-                DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select * From Clientes");
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select * From Clientes order by NOME");
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {

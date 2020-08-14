@@ -1,18 +1,35 @@
-﻿<div class="container">
-    
-    <div class="form-inline">
-        <div class="col col-8">
-            <h3>Lista de Clientes</h3>
-        </div>
-        <button type="button" class="btn btn-outline-primary">
-            <a href="../Filtro/Filtro">Filtro pelo CPF</a>
-        </button>
-    </div>
+﻿@model ClienteModel
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<div class="container">
+
+    <h3>Filtro</h3>
 
     <br />
+
+    <form asp-controller="Filtro" asp-action="Filtro">
+        <div class="form-row">
+            <div class="col col-2">
+                <input asp-for="CPF" type="text" class="form-control" placeholder="CPF" />
+            </div>
+            <div class="col col-2">
+
+                <button type="submit" class=" btn btn-outline-primary">Buscar</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 
 <br />
+
+<style>
+    .navbar-brand {
+        font-size: 35px;
+        font-family: 'Monotype Corsiva';
+        text-align: left;
+    }
+</style>
 
 <div class="container">
     <div class="table-responsive">
@@ -21,7 +38,6 @@
             <thead>
 
                 <tr>
-
                     <td></td>
                     <td></td>
                     <td style="padding: 0px 20px 0px 20px;">Id</td>
@@ -35,11 +51,12 @@
 
             <tbody>
 
-                @{ 
-                    @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                @{
+                    try
                     {
+                        @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                        {
                 <tr>
-
                     <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
                     <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
 
@@ -50,8 +67,11 @@
                     <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
 
                 </tr>
+                        }
                     }
+                    catch { }
                 }
+
 
             </tbody>
 
@@ -59,14 +79,8 @@
 
         <br />
 
-        <button type="button" class="btn btn-block btn-success" onclick="Cadastrar()">Cadastrar Cliente</button>
 
         <script>
-            // Função em JS para Cadastrar
-            function Cadastrar() {
-                window.location.href = "../Cliente/Cadastro";
-            }
-            
             // Função em JS para Editar
             function Editar(Id) {
                 window.location.href = "../Cliente/Cadastro/" + Id;
@@ -79,7 +93,7 @@
 
             // Função em JS para Voltar ao Menu
             function Voltar() {
-                window.location.href = "../Home/Menu"
+                window.location.href = "../Cliente/Index"
             }
         </script>
 
@@ -89,36 +103,3 @@
 
     </div>
 </div>
-
-<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
-<!--Padding´s dos butões e da tabela-->
-<!--=========================================-->
-<!--style="padding:2PX;"-->
-<!--style="padding: 0px 20px 0px 20px;"-->
-<!--====================================================================-->
-<!--Funções em Java Script para direcionamento-->
-<!--<script>
-
-    // Função em JS para Cadastrar
-    function Cadastrar() {
-        window.location.href = "../Cliente/Cadastro";
-    }
-
-    // Função em JS para Editar
-    function Editar(Id) {
-        window.location.href = "../Cliente/Cadastro/" + Id;
-    }
-
-    // Função em JS para Excluir
-    function Excluir(Id) {
-        window.location.href = "../Cliente/Excluir/" + Id;
-    }
-
-    // Função em JS para Voltar ao Menu
-    function Voltar() {
-        window.location.href = '../../Home/Menu';
-    }
-</script>-->
-<!--====================================================================-->
-<!--<button class="btn btn-block btn-success" type="button" onclick="Cadastrar()">Cadastrar Cliente</button>-->
-<!--<button type="button" class="btn  btn-info" onclick="Voltar()">Retornar para o Menu</button>-->
