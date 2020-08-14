@@ -77,7 +77,7 @@ namespace TreinoAspNetCore2_2.Models
                 DAL objDAL = new DAL();
                 objDAL.LimparParametros();
                 // Usando Texto como permite a Classe DAL e uma View (VClientes) Criada no BD.
-                DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select * From Clientes order by NOME");
+                DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, "Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes order by NOME");
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
