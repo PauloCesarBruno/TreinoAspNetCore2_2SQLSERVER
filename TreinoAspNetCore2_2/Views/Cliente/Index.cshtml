@@ -4,9 +4,7 @@
         <div class="col col-8">
             <h3>Lista de Clientes</h3>
         </div>
-        <button type="button" class="btn btn-outline-primary">
-            <a href="../Filtro/Filtro">Filtro pelo CPF</a>
-        </button>
+        <button type="button" class="btn btn-outline-primary" onclick="Filtro()">Filtro CPF/CNPF</button>
     </div>
 
     <br />
@@ -80,6 +78,11 @@
             // Função em JS para Voltar ao Menu
             function Voltar() {
                 window.location.href = "../Home/Menu"
+            }
+
+            // Funçao par direcionar para o filtro
+            function Filtro() {
+                window.location.href = "../Filtro/Filtro"
             }
         </script>
 
