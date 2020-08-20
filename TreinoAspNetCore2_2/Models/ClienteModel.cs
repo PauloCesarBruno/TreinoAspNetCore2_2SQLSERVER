@@ -72,9 +72,8 @@ namespace TreinoAspNetCore2_2.Models
             ClienteModel item;
             DAL objDAL = new DAL();
             objDAL.LimparParametros();
-            String sql = $"Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes Where CPF = '{cpf}'";
-            DataTable dt = objDAL.RetDatatable(sql);
-
+            DataTable dt = objDAL.ExecutaConsulta(CommandType.Text, $"Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes Where CPF = '{cpf}' order by NOME");
+           
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 item = new ClienteModel()
