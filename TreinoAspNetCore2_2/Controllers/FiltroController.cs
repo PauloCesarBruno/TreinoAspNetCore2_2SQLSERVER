@@ -29,7 +29,7 @@ namespace TreinoAspNetCore2_2.Controllers
             {
                 //Filtra o Cliente pelo CPF
                 String cpf = cliente.CPF.ToString();
-                ViewBag.ListaClientes = new ClienteModel().ListagemClientes(cpf);
+                ViewBag.ListaClientes = new ClienteModel().ListarTodosClientesCPF(cpf);
             }
             catch
             {

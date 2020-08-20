@@ -28,45 +28,7 @@ namespace TreinoAspNetCore2_2.Models
         [DataType(DataType.Currency)]
         [Display(Name = "Limite De Crédito")]
         public Decimal? LimiteDeCredito { get; set; }
-
-
-        //==================================================================================
-        // Rotina para Atender filtro de clientes
-        public List<ClienteModel> ListagemClientes(string cpf)
-        {
-            return ListarTodosClientesCPF(cpf);
-        }
-
-
-        public List<ClienteModel> ListarTodosClientesCPF(string cpf)
-        {
-           
-                List<ClienteModel> lista = new List<ClienteModel>();
-                ClienteModel item;
-                DAL objDAL = new DAL();
-                objDAL.LimparParametros();
-                String sql = $"Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes Where CPF = '{cpf}'";
-                DataTable dt = objDAL.RetDatatable(sql);
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    item = new ClienteModel()
-                    {
-                        Id = dt.Rows[i]["Id"].ToString(),
-                        Nome = dt.Rows[i]["Nome"].ToString(),
-                        CPF = dt.Rows[i]["CPF"].ToString(),
-                        DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
-                        LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
-                    };
-                    lista.Add(item);
-                    objDAL.FecharConexao();
-                }
-                return lista;                
-        }
-
-        // Fim da Rotina de Filtro
-        //==================================================================================
-
+                
 
         public List<ClienteModel> ListarTodosClientes()
         {
@@ -100,8 +62,41 @@ namespace TreinoAspNetCore2_2.Models
             }
         }
 
-       // Método para carregar as informações para Edição
-       public ClienteModel RetornarCliente(int? Id)
+        //==================================================================================
+        // Rotina para Atender filtro de clientes     
+
+        public List<ClienteModel> ListarTodosClientesCPF(string cpf)
+        {
+
+            List<ClienteModel> lista = new List<ClienteModel>();
+            ClienteModel item;
+            DAL objDAL = new DAL();
+            objDAL.LimparParametros();
+            String sql = $"Select Id, Nome, CPF, DataNascimento, LimiteDeCredito From Clientes Where CPF = '{cpf}'";
+            DataTable dt = objDAL.RetDatatable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new ClienteModel()
+                {
+                    Id = dt.Rows[i]["Id"].ToString(),
+                    Nome = dt.Rows[i]["Nome"].ToString(),
+                    CPF = dt.Rows[i]["CPF"].ToString(),
+                    DataNascimento = dt.Rows[i]["DataNascimento"].ToString(),
+                    LimiteDeCredito = Convert.ToDecimal(dt.Rows[i]["LimiteDeCredito"])
+                };
+                lista.Add(item);
+                objDAL.FecharConexao();
+            }
+            return lista;
+        }
+
+        // Fim da Rotina de Filtro
+        //==================================================================================
+
+
+        // Método para carregar as informações para Edição
+        public ClienteModel RetornarCliente(int? Id)
         {
             try
             {
