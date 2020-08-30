@@ -35,7 +35,7 @@
 
                 @{ 
                     @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
-                    {
+                     {
                 <tr>
 
                     <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
@@ -48,7 +48,7 @@
                     <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
 
                 </tr>
-                    }
+                     }
                 }
 
             </tbody>
