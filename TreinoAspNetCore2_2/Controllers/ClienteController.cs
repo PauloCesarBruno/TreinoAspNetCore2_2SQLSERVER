@@ -88,7 +88,7 @@ namespace TreinoAspNetCore2_2.Controllers
         public IActionResult Excluir(int Id)
         {
             ViewData["IdExcluir"] = Id;
-            return View();
+            return View(); // Esta View é Criada Normalmente.
         }
 
         public IActionResult ExcluirCliente(int Id)
@@ -98,7 +98,7 @@ namespace TreinoAspNetCore2_2.Controllers
             try
             {
                 new ClienteModel().Excluir(Id);
-                return View();
+                return View(); // Esta é uma PartialView Criada dentro de Shared.
             }
             catch (Exception)
             {
