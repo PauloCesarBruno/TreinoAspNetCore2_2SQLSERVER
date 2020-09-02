@@ -93,7 +93,7 @@ namespace TreinoAspNetCore2_2.Controllers
 
         public IActionResult ExcluirCliente(int Id)
         {
-            // Tratamento para que se o Vendedor não estiver vinculado a uma venda Exclui
+            // Tratamento para que se o Cliente não estiver vinculado a nada (em um casual InnerJoin) Exclui
             // Se Caso não, Não Exclui... Redireciona para View (Tratamento).
             try
             {
@@ -102,7 +102,7 @@ namespace TreinoAspNetCore2_2.Controllers
             }
             catch (Exception)
             {
-                return View();
+                return View();   // Aqui seria a View Tratamento a ser criada.
             }
         }
     }
