@@ -29,13 +29,13 @@ namespace TreinoAspNetCore2_2
                 options.CheckConsentNeeded = context => false; 
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //Adicionar os serviços Abaixo (Uso de Session)
             // Configurando o Host para que ele faça uso de Seccion.
+            services.AddCors();
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -54,6 +54,7 @@ namespace TreinoAspNetCore2_2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession(); //Adicionados para trabalhar com Sessions.
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseCookiePolicy();
 
             // Sempre que tiver um Login, Alterar a Rota (routes.MapRoute) para o Login.
