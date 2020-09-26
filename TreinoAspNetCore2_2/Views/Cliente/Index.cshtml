@@ -1,5 +1,22 @@
-﻿<div class="container">
-    
+﻿<head>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        var total = 0;
+        $(document).ready(function () {
+            $('table tbody tr').each(function () {
+                total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+            });
+            $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+        });
+    </script>
+
+</head>
+
+
+<div class="container">
+
     <div class="form-inline">
         <div class="col col-8">
             <h3>Lista de Clientes</h3>
@@ -33,25 +50,32 @@
 
             <tbody>
 
-                @{ 
+                @{
                     @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
-                     {
-                <tr>
+                    {
+                        <tr>
 
-                    <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
-                    <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
 
-                    <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
-                    <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
 
-                </tr>
-                     }
+                        </tr>
+                    }
                 }
 
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <th style="padding-left: 5px;" colspan=3>Total Investido</th>
+                    <td style="color: blue; padding-left: 18px;"></td>
+                </tr>
+            </tfoot>
 
         </table>
 
@@ -64,7 +88,7 @@
             function Cadastrar() {
                 window.location.href = "../Cliente/Cadastro";
             }
-            
+
             // Função em JS para Editar
             function Editar(Id) {
                 window.location.href = "../Cliente/Cadastro/" + Id;

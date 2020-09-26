@@ -1,6 +1,22 @@
 ﻿@model ClienteModel
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <head>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script>
+            var total = 0;
+            $(document).ready(function () {
+                $('table tbody tr').each(function () {
+                    total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+                });
+                $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+            });
+        </script>
+
+    </head>
+
 <div class="container">
 
     <h3>Filtro</h3>
@@ -55,17 +71,17 @@
                     {
                         @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
                         {
-                <tr>
-                    <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
-                    <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+                            <tr>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
 
-                    <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
-                    <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
-                    <td style="padding: 0px 20px 0px 20px;">R$ @item.LimiteDeCredito</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
 
-                </tr>
+                            </tr>
                         }
                     }
                     catch { }
@@ -73,6 +89,13 @@
 
 
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <th style="padding-left: 5px;" colspan=3>Total Investido</th>
+                    <td style="color: blue; padding-left: 18px;"></td>
+                </tr>
+            </tfoot>
 
         </table>
 
