@@ -13,17 +13,13 @@ namespace TreinoAspNetCore2_2.Models
     {
 
         public string Id { get; set; }
-
-        [Required(ErrorMessage = "Informe o Nome do Cliente")]
+                                                                
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Informe o CPF ou CNPJ do Cliente")]
+                                                               
         public string CPF { get; set; }
-
-        [Required(ErrorMessage = "Informe a Data de Nascimento do Cliente")]
+                                                                              
         public string DataNascimento { get; set; }
-
-        [Required(ErrorMessage = "Informe o Limite de Crédito do Cliente")]
+      
         [Range(1, 99999.99)] // Valor Mínimo ao Máximo
         [DataType(DataType.Currency)]
         [Display(Name = "Limite De Crédito")]

@@ -105,5 +105,27 @@ namespace TreinoAspNetCore2_2.Controllers
                 return View();   // Aqui seria a View Tratamento a ser criada.
             }
         }
+        [HttpGet]
+        public IActionResult Filtro()
+        {   //Renderiza e traz todos os Clientes
+            ViewBag.ListaClientes = new ClienteModel().ListarTodosClientes();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Filtro(ClienteModel cliente)
+        {
+            try
+            {
+                //Filtra o Cliente pelo CPF
+                String cpf = cliente.CPF.ToString();
+                ViewBag.ListaClientes = new ClienteModel().ListarTodosClientesCPF(cpf);
+            }
+            catch
+            {
+                //
+            }
+            return View();
+        }
     }
 }

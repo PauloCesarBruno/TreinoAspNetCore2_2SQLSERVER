@@ -1,0 +1,133 @@
+﻿@model ClienteModel 
+
+<!-- Função abaixo em JavaScript para calcular a soma da coluna de Limite de Credito children[6]-->
+<head>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="icon" href="~/img/Icone.ico" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        var total = 0;
+        $(document).ready(function () {
+            $('table tbody tr').each(function () {
+                total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+            });
+            $('table tfoot td').text(total.toLocaleString('pt-BR'));
+        });
+    </script>
+
+</head>
+<!--=============================================================================================-->
+
+<div class="container">
+    <h3>Filtro</h3>
+    <hr />
+
+    <form asp-controller="Cliente" asp-action="Filtro">
+        <div class="form-row">
+            <div class=" col col-4">
+                <input asp-for="CPF" type="text" class="form-control" placeholder="CPF/CNPJ" />
+            </div>
+            <div class="col col-2">
+                <button type="submit" class="btn btn-outline-primary"><i class="fa fa-check"></i> Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br />
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="padding: 0px 20px 0px 20px;">Id</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nome</td>
+                    <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
+                    <td style="padding: 0px 20px 0px 20px;">Limite</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    @try
+                    {
+                        @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                        {
+                            <tr>
+                                <td style="padding: 2px;"><button type="button" class="btn btn-warning btn-sm Editar" data-id="@item.Id"> <i class="fa fa-edit"></i> Editar</button></td>
+                                <td style="padding: 2px;"><button type="button" class="btn btn-danger btn-sm Excluir" data-id="@item.Id"> <i class="fa fa-eraser"></i> Excluir</button></td>
+
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
+                            </tr>
+                        }
+                    }
+                    catch
+                    {
+                        //
+                    }
+                }
+            </tbody>
+
+            <!-- No tfoot abaixo é onde é passado a informação da função de calcular coluna -->
+            <tfoot>
+                <tr>
+                    <th style="padding-left: 5px;" colspan=3>Total Investido</th>
+                    <td style="color: blue; padding-left: 18px;"></td>
+                </tr>
+            </tfoot>
+            <!--==============================================================================-->
+
+        </table>
+        <div class="modal" id="modal">
+
+        </div>
+
+        @section scripts{
+            <script>
+                $(function () {
+                    $(".Editar").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Cadastro?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+                $(function () {
+                    $(".Excluir").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Excluir?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+
+            </script>
+        }
+
+        <script>
+
+            // Função para voltar ao menu
+            function Voltar() {
+                window.location.href = '../Cliente/Index';
+            }
+
+        </script>
+
+        <br />
+        <button type="button" class="btn btn-info btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Voltar à listagem de Clientes</button>
+
+    </div>
+</div>
+

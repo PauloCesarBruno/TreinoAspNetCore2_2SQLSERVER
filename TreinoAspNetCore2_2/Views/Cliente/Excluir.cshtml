@@ -1,21 +1,44 @@
-﻿<br /><br /><br />
-<h2>Excluir Registro</h2>
+﻿<!-- COMEÇAR DO MODAL- Dialog-->
+<div class="modal-dialog">
+    <div class="modal-content modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+            <h5 style="padding-right: 400px; class="modal-title">Exclusão</h5>
+        </div>
+        <div class="modal-body">
+            <h5>Deseja Realmente Excluir o Registro selecionado ?</h5>
+            <hr />
+            <br />
 
-<h3>Deseja Realmente Excluir o Registro Selecionado ?</h3>
+            <div class="form-check-inline">
+                <button type="button" class="btn btn-danger btn-sm" onclick="Nao()"><i class="fa fa-edit"></i> Nao</button>
+                <button type="button" class="btn btn-success btn-sm ml-1 Cadastro"><i class="fa fa-eraser"></i> Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<button type="button" class="btn btn-danger" onclick="Nao()">Não</button>
-<button type="button" class="btn btn-success" onclick="Sim()">Sim</button>
+@section scripts{
+    <script>
 
-<!-- Gerer Funções em Java Script para o (Nao) e o (sim)-->
+        $(function () {
+            $(".Cadastro").click(function () {
+                var id = $(this).attr("data-id");
+                $("#modal").load("ExcluirCliente?id=" + '@ViewData["IdExcluir"].ToString()', function () {
+                    $("#modal").modal();
+                })
+            });
+        })
+
+    </script>
+}
 
 <script>
-    function Sim()
-    {
+    function Sim() {
         window.location.href = '../../Cliente/ExcluirCliente/' + '@ViewData["IdExcluir"].ToString()';
     }
 
-    function Nao()
-    {
-        window.location.href = '../../Cliente/Index'
+    function Nao() {
+        window.location.href = '../../Cliente/Index';
     }
 </script>

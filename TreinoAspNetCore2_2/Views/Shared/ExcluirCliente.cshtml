@@ -1,15 +1,24 @@
-﻿<br /><br />
-<h2>Registro Excluido Com Sucesso !!!</h2>
+﻿<!-- COMEÇAR DO MODAL- Dialog-->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+            <h5 style="padding-right: 350px;" class="modal-title">Sucesso !!!</h5>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <h3>Registro Exluido com Sucesso !</h3>
+                <hr />
+                <br />
+                <button type="button" class="btn btn-info" onclick="Voltar()"> <i class="fa fa-step-backward"></i> Voltar à Listagem de Clientes</button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 
-<button type="button" class="btn btn-primary" onclick="Voltar()">Volta à Listagem de Clientes</button>
-
-<!-- Gerer Funções em Java Script para o (Nao) e o (sim)-->
 
 <script>
-
-    function Voltar()
-    {
-        window.location.href = '../../Cliente/Index'
+    function Voltar() {
+        window.location.href = '../../Cliente/Index';
     }
-
 </script>

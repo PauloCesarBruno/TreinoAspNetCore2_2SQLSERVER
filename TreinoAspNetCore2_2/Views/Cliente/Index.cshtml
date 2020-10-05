@@ -1,151 +1,130 @@
-﻿<head>
+﻿@model ClienteModel
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!--=============================================================================================-->
+    <!-- Função abaixo em JavaScript para calcular a soma da coluna de Limite de Credito children[6]-->
+    <head>
 
-    <script>
-        var total = 0;
-        $(document).ready(function () {
-            $('table tbody tr').each(function () {
-                total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script>
+            var total = 0;
+            $(document).ready(function () {
+                $('table tbody tr').each(function () {
+                    total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+                });
+                $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
             });
-            $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
-        });
-    </script>
+        </script>
 
-</head>
+    </head>
+    <!--=============================================================================================-->
 
-
-<div class="container">
-
-    <div class="form-inline">
-        <div class="col col-8">
-            <h3>Lista de Clientes</h3>
+    <div class="container">
+        <div class="form-inline">
+            <div class="col col-8">
+                <h3>Listagem de Clientes</h3>
+            </div>
+            <button type="button" class="btn btn-outline-primary" onclick="Filtro()"><i class="fa fa-filter"></i> Filtro CPF/CNPJ</button>
         </div>
-        <button type="button" class="btn btn-outline-primary" onclick="Filtro()">Filtro CPF/CNPF</button>
+        <hr />
     </div>
 
     <br />
-</div>
 
-<br />
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="padding: 0px 20px 0px 20px;">Id</td>
+                        <td style="padding: 0px 20px 0px 20px;">Nome</td>
+                        <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
+                        <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
+                        <td style="padding: 0px 20px 0px 20px;">Limite</td>
+                    </tr>
+                </thead>
 
-<div class="container">
-    <div class="table-responsive">
-        <table class="table-bordered">
+                <tbody>
+                    @{
+                        @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                        {
+                            <tr>
+                                <td style="padding: 2px;"><button type="button" class="btn btn-warning btn-sm Editar" data-id="@item.Id"> <i class="fa fa-edit"></i> Editar</button></td>
+                                <td style="padding: 2px;"><button type="button" class="btn btn-danger btn-sm Excluir" data-id="@item.Id"> <i class="fa fa-eraser"></i> Excluir</button></td>
 
-            <thead>
-
-                <tr>
-
-                    <td></td>
-                    <td></td>
-                    <td style="padding: 0px 20px 0px 20px;">Id</td>
-                    <td style="padding: 0px 20px 0px 20px;">Nome</td>
-                    <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
-                    <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
-                    <td style="padding: 0px 20px 0px 20px;">Limite</td>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @{
-                    @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
-                    {
-                        <tr>
-
-                            <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
-                            <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
-
-                            <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
-                            <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
-                            <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
-                            <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
-                            <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
-
-                        </tr>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
+                            </tr>
+                        }
                     }
+                </tbody>
+
+                <!-- No tfoot abaixo é onde é passado a informação da função de calcular coluna -->
+                <tfoot>
+                    <tr>
+                        <th style="padding-left: 5px;" colspan=3>Total Investido</th>
+                        <td style="color: blue; padding-left: 18px;"></td>
+                    </tr>
+                </tfoot>
+                <!--==============================================================================-->
+
+            </table>
+            <div class="modal" id="modal">
+
+            </div>
+
+            @section scripts{
+                <script>
+                    $(function () {
+                        $(".Editar").click(function () {
+                            var id = $(this).attr("data-id");
+                            $("#modal").load("Cadastro?id=" + id, function () {
+                                $("#modal").modal();
+                            })
+                        });
+                    })
+
+                    $(function () {
+                        $(".Excluir").click(function () {
+                            var id = $(this).attr("data-id");
+                            $("#modal").load("Excluir?id=" + id, function () {
+                                $("#modal").modal();
+                            })
+                        });
+                    })
+
+                    $(".Cadastro").click(function () {
+                        $("#modal").load("Cadastro", function () {
+                            $("#modal").modal();
+                        })
+                    });
+
+                </script>
+            }
+
+            <br />
+            <div class="form-inline">
+                <button type="button" class="btn btn-success btn-sm Cadastro"> <i class="fa fa-user"></i> Cadastrar Cliente</button>
+                <button type="button" class="btn btn-info btn-sm ml-3" onclick="Voltar()"> <i class="fa fa-step-backward"></i> Voltar</button>
+            </div>
+
+            <script>
+
+                // Função para voltar ao menu
+                function Voltar() {
+                    window.location.href = '../Home/Index';
                 }
 
-            </tbody>
+                // Função para filtrar cliente pelo CPF/CNPJ
+                function Filtro() {
+                    window.location.href = '../Cliente/Filtro';
+                }
+            </script>
 
-            <tfoot>
-                <tr>
-                    <th style="padding-left: 5px;" colspan=3>Total Investido</th>
-                    <td style="color: blue; padding-left: 18px;"></td>
-                </tr>
-            </tfoot>
-
-        </table>
-
-        <br />
-
-        <button type="button" class="btn btn-block btn-success" onclick="Cadastrar()">Cadastrar Cliente</button>
-
-        <script>
-            // Função em JS para Cadastrar
-            function Cadastrar() {
-                window.location.href = "../Cliente/Cadastro";
-            }
-
-            // Função em JS para Editar
-            function Editar(Id) {
-                window.location.href = "../Cliente/Cadastro/" + Id;
-            }
-
-            // Função em JS para Excluir
-            function Excluir(Id) {
-                window.location.href = "../Cliente/Excluir/" + Id;
-            }
-
-            // Função em JS para Voltar ao Menu
-            function Voltar() {
-                window.location.href = "../Home/Menu"
-            }
-
-            // Funçao par direcionar para o filtro
-            function Filtro() {
-                window.location.href = "../Filtro/Filtro"
-            }
-        </script>
-
-        <br />
-
-        <button type="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
-
+        </div>
     </div>
-</div>
-
-<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
-<!--Padding´s dos butões e da tabela-->
-<!--=========================================-->
-<!--style="padding:2PX;"-->
-<!--style="padding: 0px 20px 0px 20px;"-->
-<!--====================================================================-->
-<!--Funções em Java Script para direcionamento-->
-<!--<script>
-
-    // Função em JS para Cadastrar
-    function Cadastrar() {
-        window.location.href = "../Cliente/Cadastro";
-    }
-
-    // Função em JS para Editar
-    function Editar(Id) {
-        window.location.href = "../Cliente/Cadastro/" + Id;
-    }
-
-    // Função em JS para Excluir
-    function Excluir(Id) {
-        window.location.href = "../Cliente/Excluir/" + Id;
-    }
-
-    // Função em JS para Voltar ao Menu
-    function Voltar() {
-        window.location.href = '../../Home/Menu';
-    }
-</script>-->
-<!--====================================================================-->
-<!--<button class="btn btn-block btn-success" type="button" onclick="Cadastrar()">Cadastrar Cliente</button>-->
-<!--<button type="button" class="btn  btn-info" onclick="Voltar()">Retornar para o Menu</button>-->
