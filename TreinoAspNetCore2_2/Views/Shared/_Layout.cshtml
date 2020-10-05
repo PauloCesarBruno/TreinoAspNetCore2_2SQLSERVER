@@ -20,13 +20,13 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-     
-    <style >
-        .navbar-brand{
+
+    <style>
+        .navbar-brand {
             font-size: 35px;
-            font-family:'Monotype Corsiva';
-            text-align:left;
-        } 
+            font-family: 'Monotype Corsiva';
+            text-align: left;
+        }
     </style>
 
 </head>
@@ -63,8 +63,7 @@
         <main role="main" class="pb-4">
             @RenderBody()
         </main>
-    </div>
-
+    </div>    
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -87,7 +86,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
-    
+
     <script>
         function CarregaUsuarioLogado()
         {
@@ -105,5 +104,6 @@
         }
     </script>
 </body>
+
 </html>
 
