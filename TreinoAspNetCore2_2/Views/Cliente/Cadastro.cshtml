@@ -1,16 +1,6 @@
 ﻿<!-- Inportar:-->
 @model ClienteModel
 
-    <script>
-        var total = 0;
-        $(document).ready(function () {
-            $('table tbody tr').each(function () {
-                total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
-            });
-            $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
-        });
-    </script>
-
 <!-- COMEÇAR DO MODAL- Dialog-->
 <div class="modal-dialog">
     <div class="modal-content">
