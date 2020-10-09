@@ -1,12 +1,6 @@
 ﻿<!-- Inportar:-->
 @model ClienteModel
 
-
-<head>
-    
-    <link rel="icon" href="~/img/Calc.ico" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
     <script>
         var total = 0;
         $(document).ready(function () {
@@ -16,8 +10,6 @@
             $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
         });
     </script>
-
-</head>
 
 <!-- COMEÇAR DO MODAL- Dialog-->
 <div class="modal-dialog">
