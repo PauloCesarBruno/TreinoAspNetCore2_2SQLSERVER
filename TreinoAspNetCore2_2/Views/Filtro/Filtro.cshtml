@@ -1,0 +1,127 @@
+﻿@model ClienteModel
+
+    <head>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script>
+            var total = 0;
+            $(document).ready(function () {
+                $('table tbody tr').each(function () {
+                    total += parseFloat(this.children[6].innerHTML.replace(',', '.'));
+                });
+                $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+            });
+        </script>
+
+    </head>
+
+<div class="container">
+
+    <h3>Filtro</h3>
+
+    <br />
+
+    <form asp-controller="Filtro" asp-action="Filtro">
+        <div class="form-row">
+            <div class="col col-4">
+                <input asp-for="CPF" type="text" class="form-control" placeholder="CPF/CNPJ" />
+            </div>
+            <div class="col col-2">
+                <button type="submit" class=" btn btn-outline-primary">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<br />
+
+<style>
+    .navbar-brand {
+        font-size: 35px;
+        font-family: 'Monotype Corsiva';
+        text-align: left;
+    }
+</style>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table-bordered">
+
+            <thead>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="padding: 0px 20px 0px 20px;">Id</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nome</td>
+                    <td style="padding: 0px 20px 0px 20px;">CPF/CNPJ</td>
+                    <td style="padding: 0px 20px 0px 20px;">Nascimento</td>
+                    <td style="padding: 0px 20px 0px 20px;">Limite</td>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @{
+                    try
+                    {
+                        @foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                        {
+                            <tr>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.CPF</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.DataNascimento</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.LimiteDeCredito</td>
+
+                            </tr>
+                        }
+                    }
+                    catch { }
+                }
+
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th style="padding-left: 5px;" colspan=3>Total Investido</th>
+                    <td style="color: blue; padding-left: 18px;"></td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <br />
+
+
+        <script>
+            // Função em JS para Editar
+            function Editar(Id) {
+                window.location.href = "../Cliente/Cadastro/" + Id;
+            }
+
+            // Função em JS para Excluir
+            function Excluir(Id) {
+                window.location.href = "../Cliente/Excluir/" + Id;
+            }
+
+            // Função em JS para Voltar ao Menu
+            function Voltar() {
+                window.location.href = "../Cliente/Index"
+            }
+        </script>
+
+        <br />
+
+        <button type="button" class="btn btn-info" onclick="Voltar()">Voltar ao Menu</button>
+
+    </div>
+</div>
